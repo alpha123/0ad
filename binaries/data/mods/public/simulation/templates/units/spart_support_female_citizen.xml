@@ -2,12 +2,6 @@
 <Entity parent="template_unit_support_female_citizen">
   <Attack>
     <Melee>
-      <Bonuses>
-       <BonusSiege>
-          <Classes>Siege</Classes>
-          <Multiplier>2.5</Multiplier>
-        </BonusSiege>
-      </Bonuses>
       <RestrictedClasses datatype="tokens">-Infantry -Cavalry -Champion -CitizenSoldier</RestrictedClasses>
     </Melee>
   </Attack>

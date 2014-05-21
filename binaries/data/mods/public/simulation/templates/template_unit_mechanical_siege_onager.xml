@@ -16,16 +16,6 @@
       <PrepareTime>5000</PrepareTime>
       <RepeatTime>5000</RepeatTime>
       <Spread>6.0</Spread>
-      <Bonuses>
-        <BonusFort>
-          <Classes>Fortress</Classes>
-          <Multiplier>1.25</Multiplier>
-        </BonusFort>
-        <NerfWall>
-          <Classes>StoneWall</Classes>
-          <Multiplier>0.75</Multiplier>
-        </NerfWall>
-      </Bonuses>
       <Splash>
         <Shape>Circular</Shape>
         <Range>10</Range>

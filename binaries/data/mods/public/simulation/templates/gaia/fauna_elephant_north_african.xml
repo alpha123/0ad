@@ -12,12 +12,6 @@
       <Crush>0.0</Crush>
       <MaxRange>6.0</MaxRange>
       <RepeatTime>1000</RepeatTime>
-	  <Bonuses>
-		<BonusCav>
-		  <Classes>Cavalry</Classes>
-		  <Multiplier>1.5</Multiplier>
-		</BonusCav>
-	  </Bonuses>
     </Melee>
   </Attack>
   <Footprint>

@@ -6,16 +6,6 @@
       <Pierce>0.0</Pierce>
       <Crush>0.0</Crush>
       <MaxRange>6.0</MaxRange>
-	  <Bonuses>
-		<BonusPrimary>
-		  <Classes>Support</Classes>
-		  <Multiplier>2.0</Multiplier>
-		</BonusPrimary>
-		<BonusSecondary>
-		  <Classes>Infantry Bow</Classes>
-		  <Multiplier>2.0</Multiplier>
-		</BonusSecondary>
-	  </Bonuses>
     </Melee>
     <Charge>
       <Hack>30.0</Hack>
@@ -23,16 +13,6 @@
       <Crush>0.0</Crush>
       <MaxRange>6.0</MaxRange>
       <MinRange>0.0</MinRange>
-	  <Bonuses>
-		<BonusPrimary>
-		  <Classes>Support</Classes>
-		  <Multiplier>2.0</Multiplier>
-		</BonusPrimary>
-		<BonusSecondary>
-		  <Classes>Infantry Bow</Classes>
-		  <Multiplier>2.0</Multiplier>
-		</BonusSecondary>
-	  </Bonuses>
     </Charge>
   </Attack>
   <Cost>

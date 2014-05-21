@@ -10,20 +10,8 @@
   </Armour>
   <Attack>
     <Melee>
-	  <Bonuses>
-		<Herocide>
-		  <Classes>Hero</Classes>
-		  <Multiplier>1.2</Multiplier>
-		</Herocide>
-	  </Bonuses>
     </Melee>
     <Charge>
-	  <Bonuses>
-		<Herocide>
-		  <Classes>Hero</Classes>
-		  <Multiplier>1.2</Multiplier>
-		</Herocide>
-	  </Bonuses>
     </Charge>
   </Attack>
   <Cost>

@@ -18,12 +18,6 @@
       <RepeatTime>2000</RepeatTime>
       <Spread>2.0</Spread>
       <PreferredClasses datatype="tokens">Structure</PreferredClasses>
-      <Bonuses>
-        <BonusPrimary>
-          <Classes>Structure</Classes>
-          <Multiplier>2.0</Multiplier>
-        </BonusPrimary>
-      </Bonuses>
     </Ranged>
   </Attack>
   <BuildingAI>

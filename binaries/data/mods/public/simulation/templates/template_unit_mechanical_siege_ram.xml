@@ -12,12 +12,6 @@
       <Crush>80.0</Crush>
       <MaxRange>6.5</MaxRange>
       <RepeatTime>1500</RepeatTime>
-	  <Bonuses>
-		<BonusGates>
-		  <Classes>Gates</Classes>
-		  <Multiplier>1.5</Multiplier>
-		</BonusGates>
-	  </Bonuses>
       <RestrictedClasses datatype="tokens">Organic</RestrictedClasses>
       <PreferredClasses datatype="tokens">Gates Structure</PreferredClasses>
     </Melee>
@@ -27,12 +21,6 @@
       <Crush>100.0</Crush>
       <MaxRange>6.5</MaxRange>
       <MinRange>0.0</MinRange>
-	  <Bonuses>
-		<BonusGates>
-		  <Classes>Gates</Classes>
-		  <Multiplier>1.5</Multiplier>
-		</BonusGates>
-	  </Bonuses>
       <RestrictedClasses datatype="tokens">Organic</RestrictedClasses>
       <PreferredClasses datatype="tokens">Gates Structure</PreferredClasses>
     </Charge>

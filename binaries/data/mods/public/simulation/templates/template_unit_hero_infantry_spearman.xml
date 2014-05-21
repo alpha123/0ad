@@ -10,22 +10,10 @@
       <Hack>30.0</Hack>
       <Pierce>0.0</Pierce>
       <Crush>0.0</Crush>
-	  <Bonuses>
-		<BonusCavMelee>
-		  <Classes>Cavalry</Classes>
-		  <Multiplier>2.0</Multiplier>
-		</BonusCavMelee>
-	  </Bonuses>
     </Melee>
     <Charge>
       <Hack>60.0</Hack>
       <Pierce>0.0</Pierce>
-	  <Bonuses>
-		<BonusCavMelee>
-		  <Classes>Cavalry</Classes>
-		  <Multiplier>2.0</Multiplier>
-		</BonusCavMelee>
-	  </Bonuses>
     </Charge>
   </Attack>
   <Identity>
