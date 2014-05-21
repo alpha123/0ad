@@ -152,9 +152,9 @@ function formatLimitString(trainEntLimit, trainEntCount, trainEntLimitChangers)
 	for (var c in trainEntLimitChangers)
 	{
 		if (trainEntLimitChangers[c] > 0)
-			text += "\n" + sprintf("%(changer)s enlarges the limit with %(change)s.", { changer: c, change: trainEntLimitChangers[c] });
+			text += "\n" + sprintf(translate("%(changer)s enlarges the limit with %(change)s."), { changer: translate(c), change: trainEntLimitChangers[c] });
 		else if (trainEntLimitChangers[c] < 0)
-			text += "\n" + sprintf("%(changer)s lessens the limit with %(change)s.", { changer: c, change: (-trainEntLimitChangers[c]) });
+			text += "\n" + sprintf(translate("%(changer)s lessens the limit with %(change)s."), { changer: translate(c), change: (-trainEntLimitChangers[c]) });
 	}
 	return text;
 }
@@ -514,7 +514,17 @@ function setupUnitPanel(guiName, usedPanels, unitEntState, playerState, items, c
 				var [trainEntLimit, trainEntCount, canBeAddedCount, trainEntLimitChangers] =
 					getEntityLimitAndCount(playerState, entType);
 				tooltip += formatLimitString(trainEntLimit, trainEntCount, trainEntLimitChangers);
-
+				if (Engine.ConfigDB_GetValue("user", "showdetailedtooltips") === "true")
+				{
+					if (template.health)
+						tooltip += "\n[font=\"sans-bold-13\"]" + translate("Health:") + "[/font] " + template.health;
+					if (template.attack)
+						tooltip += "\n" + getEntityAttack(template);
+					if (template.armour)
+						tooltip += "\n[font=\"sans-bold-13\"]" + translate("Armor:") + "[/font] " + armorTypesToText(template.armour);
+					if (template.speed)
+						tooltip += "\n" + getEntitySpeed(template);
+				}
 				tooltip += "[color=\"255 251 131\"]" + formatBatchTrainingString(buildingsCountToTrainFullBatch, fullBatchSize, remainderBatch) + "[/color]";
 				break;
 
@@ -643,7 +653,7 @@ function setupUnitPanel(guiName, usedPanels, unitEntState, playerState, items, c
 			});
 
 			guiSelection.hidden = !formationSelected;
-			icon.sprite = "stretched:"+grayscale+"session/icons/"+item+".png";
+			icon.sprite = "stretched:"+grayscale+"session/icons/"+formationInfo.icon;
 
  		}
 		else if (guiName == STANCE)
