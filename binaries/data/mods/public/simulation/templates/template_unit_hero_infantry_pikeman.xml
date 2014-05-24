@@ -11,23 +11,11 @@
       <Pierce>0.0</Pierce>
       <Crush>0.0</Crush>
       <MaxRange>8.0</MaxRange>
-	  <Bonuses>
-		<BonusCavalry>
-		  <Classes>Cavalry</Classes>
-		  <Multiplier>2.0</Multiplier>
-		</BonusCavalry>
-	  </Bonuses>
     </Melee>
     <Charge>
       <Hack>20.0</Hack>
       <Pierce>0.0</Pierce>
       <MaxRange>8.0</MaxRange>
-	  <Bonuses>
-		<BonusCavalry>
-		  <Classes>Cavalry</Classes>
-		  <Multiplier>2.0</Multiplier>
-		</BonusCavalry>
-	  </Bonuses>
     </Charge>
   </Attack>
   <Identity>

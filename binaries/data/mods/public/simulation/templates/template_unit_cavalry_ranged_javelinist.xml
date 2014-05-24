@@ -3,22 +3,12 @@
   <Attack>
     <Ranged>
       <Hack>0.0</Hack>
-      <Pierce>25.0</Pierce>
+      <Pierce>20.0</Pierce>
       <Crush>0.0</Crush>
       <MaxRange>44</MaxRange>
       <ProjectileSpeed>50.0</ProjectileSpeed>
-      <PrepareTime>1200</PrepareTime>
-      <RepeatTime>2000</RepeatTime>
-	  <Bonuses>
-		<BonusPrimary>
-		  <Classes>Infantry Bow</Classes>
-		  <Multiplier>2.0</Multiplier>
-		</BonusPrimary>
-		<BonusSecondary>
-		  <Classes>Cavalry Sword</Classes>
-		  <Multiplier>1.5</Multiplier>
-		</BonusSecondary>
-	  </Bonuses>
+      <PrepareTime>1000</PrepareTime>
+      <RepeatTime>1000</RepeatTime>
     </Ranged>
   </Attack>
   <Cost>
