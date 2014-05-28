@@ -9,7 +9,7 @@
     <Ranged>
       <Pierce>0.0</Pierce>
       <Crush>30.0</Crush>
-      <Spread>1.0</Spread>
+      <Spread>0</Spread>
       <MaxRange>48</MaxRange>
     </Ranged>
   </Attack>

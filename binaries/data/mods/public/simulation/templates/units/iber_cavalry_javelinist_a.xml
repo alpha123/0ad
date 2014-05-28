@@ -19,7 +19,7 @@
   </Health>
   <Attack>
     <Ranged>
-      <Spread>1.3</Spread>
+      <Spread>0</Spread>
       <MaxRange>48</MaxRange>
     </Ranged>
   </Attack>

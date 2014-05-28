@@ -9,7 +9,7 @@
     <Ranged>
       <Pierce>20.0</Pierce>
       <MaxRange>60</MaxRange>
-      <Spread>1.0</Spread>
+      <Spread>0</Spread>
     </Ranged>
   </Attack>
   <Cost>

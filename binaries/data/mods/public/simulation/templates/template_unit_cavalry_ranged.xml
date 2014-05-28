@@ -16,7 +16,7 @@
       <PrepareTime>900</PrepareTime>
       <RepeatTime>1500</RepeatTime>
       <PreferredClasses datatype="tokens">Organic</PreferredClasses>
-      <Spread>1.6</Spread>
+      <Spread>0</Spread>
     </Ranged>
   </Attack>
   <Identity>
