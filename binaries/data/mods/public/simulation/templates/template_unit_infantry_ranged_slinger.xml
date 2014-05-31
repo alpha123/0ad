@@ -9,7 +9,7 @@
     <Ranged>
       <Hack>0.0</Hack>
       <Pierce>5.0</Pierce>
-      <Crush>5.0</Crush>
+      <Crush>10.0</Crush>
       <MaxRange>48.0</MaxRange>
       <MinRange>0.0</MinRange>
       <ProjectileSpeed>60.0</ProjectileSpeed>
@@ -20,7 +20,7 @@
   </Attack>
   <Cost>
     <Resources>
-      <stone>40</stone>
+      <stone>50</stone>
     </Resources>
   </Cost>
   <Identity>
@@ -32,7 +32,7 @@ Countered by: Cavalry.</Tooltip>
   </Identity>
   <Loot>
     <xp>75</xp>
-    <stone>4</stone>
+    <stone>5</stone>
   </Loot>
   <UnitMotion>
     <WalkSpeed>10.0</WalkSpeed>
