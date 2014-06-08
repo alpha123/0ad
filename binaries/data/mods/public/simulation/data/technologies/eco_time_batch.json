@@ -1,0 +1,14 @@
+{
+	"genericName": "Batch time",
+	"description": "Decrease batch time",
+	"cost": {"food": 1000, "wood": 500, "stone": 500, "metal": 500},
+	"requirements": {"tech": "phase_city"},
+	"supersedes": "eco_health",
+	"icon": "plow.png",
+	"researchTime": 40,
+	"tooltip": "...",
+	"modifications": [{"value": "ProductionQueue/BatchTimeModifier", "add": -0.3}],
+	"affects": ["Military Structures"],
+	"soundComplete": "interface/alarm/alarm_upgradearmory.xml"
+}
+

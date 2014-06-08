@@ -1,0 +1,13 @@
+{
+    "genericName": "Sheep food",
+    "cost": { "food": 400, "wood": 0, "stone": 0, "metal": 0 },
+    "requirements": {"tech": "phase_town"},
+    "requirementsTooltip": "...",
+	"supersedes": "eco_gather_hunting",
+    "icon": "town_phase.png",
+    "researchTime": 20,
+    "autoResearch": false,
+    "tooltip": "Double sheep food",
+    "modifications": [{"value": "Resources/food", "multiply": 2}],
+    "affects": ["Domestic"],
+}

@@ -1,0 +1,12 @@
+{
+    "genericName": "Hunting",
+    "cost": { "food": 200, "wood": 100, "stone": 0, "metal": 0 },
+    "requirements": {"tech": "phase_town"},
+    "requirementsTooltip": "...",
+    "icon": "town_phase.png",
+    "researchTime": 30,
+    "autoResearch": false,
+    "tooltip": "+60% hunting rate",
+    "modifications": [{"value": "ResourceGatherer/Rates/food.meat", "multiply": 1.6}],
+    "affects": ["Cavalry", "Worker"],
+}

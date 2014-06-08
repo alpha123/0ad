@@ -1,0 +1,13 @@
+{
+	"genericName": "Hygiene",
+	"description": "+30% health",
+	"cost": {"food": 800, "wood": 0, "stone": 300, "metal": 0},
+	"requirements": {"tech": "phase_village"},
+	"supersedes": "eco_gather_farms",
+	"icon": "plow.png",
+	"researchTime": 60,
+	"tooltip": "...",
+	"modifications": [{"value": "Health/Max", "multiply": 1.3}],
+	"affects": ["Organic"],
+	"soundComplete": "interface/alarm/alarm_upgradearmory.xml"
+}

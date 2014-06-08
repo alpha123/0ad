@@ -1,0 +1,18 @@
+{
+	"genericName": "Cav armor",
+	"description": "...",
+	"cost": {"food": 500, "wood": 500, "stone": 0, "metal": 800},
+	"requirements": {"tech": "phase_city"},
+	"requirementsTooltip": "Unlocked in Town Phase.",
+	"supersedes": "mil_cav_attack_2",
+	"icon": "armor_leather.png",
+	"researchTime": 60,
+	"tooltip": "+ 5 armor for cav",
+	"modifications": [
+		{"value": "Armour/Hack", "add": 5.0}
+		{"value": "Armour/Pierce", "add": 5.0}
+	],
+	"affects": ["Cavalry"],
+	"soundComplete": "interface/alarm/alarm_upgradearmory.xml"
+} 
+

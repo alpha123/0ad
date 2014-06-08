@@ -1,0 +1,15 @@
+{
+	"pair": "pair_trade",
+	"genericName": "Bart rate",
+	"description": "Currently same as the paired",
+	"cost": {"food": 0, "wood": 0, "stone": 0, "metal": 600},
+	"requirements": {"tech": "phase_village"},
+	"supersedes": "mil_loot",
+	"icon": "wheel.png",
+	"researchTime": 60,
+	"tooltip": "Traders +65% trade income",
+	"modifications": [{"value": "Trader/GainMultiplier", "multiply": 1.65}],
+	"affects": ["Trader"],
+	"soundComplete": "interface/alarm/alarm_upgradearmory.xml"
+}
+

@@ -1,0 +1,14 @@
+{
+	"genericName": "Culture",
+	"description": "-30% tech time",
+	"cost": {"food": 500, "wood": 500, "stone": 500, "metal": 500},
+	"requirements": {"tech": "phase_city"},
+	"supersedes": "eco_health",
+	"icon": "plow.png",
+	"researchTime": 60,
+	"tooltip": "...",
+	"modifications": [{"value": "ProductionQueue/BatchTimeModifier", "add": -0.3}],
+	"affects": ["Military Structures"],
+	"soundComplete": "interface/alarm/alarm_upgradearmory.xml"
+}
+

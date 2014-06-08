@@ -1,0 +1,14 @@
+{
+    "genericName": "Animals health",
+    "cost": { "food": 1000, "wood": 300, "stone": 0, "metal": 200 },
+	"requirements": {"all": [{"tech": "eco_gather_berries"}, {"tech": "mil_prom_women"}]},
+	"supersedes": "eco_gather_berries",
+    "icon": "town_phase.png",
+    "researchTime": 50,
+    "autoResearch": false,
+    "tooltip": "Health on animals",
+    "modifications": [{"value": "Health/Max", "multiply": 1.2}],
+    "affects": ["Dog", "Cavalry", "Elephant"]
+}
+
+

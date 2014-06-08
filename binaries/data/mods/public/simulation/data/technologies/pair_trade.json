@@ -1,0 +1,5 @@
+{
+	"genericName": "Income vs barter",
+	"top": "eco_trade_income",
+	"bottom": "eco_trade_bart_rate"
+}

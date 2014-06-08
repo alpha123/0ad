@@ -1,0 +1,17 @@
+{
+	"pair": "pair_range",
+	"genericName": "Range inf attack",
+	"description": "...",
+	"cost": {"food": 500, "wood": 500, "stone": 0, "metal": 800},
+	"requirements": {"tech": "phase_town"},
+	"requirementsTooltip": "Unlocked in Town Phase.",
+	"icon": "armor_leather.png",
+	"researchTime": 60,
+	"tooltip": "+ 3 attack for ranged inf",
+	"modifications": [
+		{"value": "Attack/Pierce", "add": 3.0}
+	],
+	"affects": ["Ranged Infantry"],
+	"soundComplete": "interface/alarm/alarm_upgradearmory.xml"
+} 
+

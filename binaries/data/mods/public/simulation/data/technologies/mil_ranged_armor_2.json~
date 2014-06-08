@@ -1,0 +1,19 @@
+{
+	"pair": "pair_range",
+	"genericName": "Range inf armor",
+	"description": "...",
+	"cost": {"food": 500, "wood": 500, "stone": 0, "metal": 800},
+	"requirements": {"tech": "phase_town"},
+	"requirementsTooltip": "Unlocked in Town Phase.",
+	"supersedes": "mil_cav_armor_2",
+	"icon": "armor_leather.png",
+	"researchTime": 60,
+	"tooltip": "+ 3 armor for ranged inf",
+	"modifications": [
+		{"value": "Armour/Hack", "add": 3.0}
+		{"value": "Armour/Pierce", "add": 3.0}
+	],
+	"affects": ["Ranged Infantry"],
+	"soundComplete": "interface/alarm/alarm_upgradearmory.xml"
+} 
+

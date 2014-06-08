@@ -1,0 +1,17 @@
+{
+	"pair": "pair_inf",
+	"genericName": "Melee inf attack",
+	"description": "...",
+	"cost": {"food": 0, "wood": 500, "stone": 0, "metal": 400},
+	"requirements": {"tech": "phase_town"},
+	"requirementsTooltip": "Unlocked in Town Phase.",
+	"icon": "armor_leather.png",
+	"researchTime": 60,
+	"tooltip": "+ 3 attack for melee inf",
+	"modifications": [
+		{"value": "Attack/Hack", "add": 3.0}
+	],
+	"affects": ["Melee Infatry"],
+	"soundComplete": "interface/alarm/alarm_upgradearmory.xml"
+} 
+

@@ -1,0 +1,18 @@
+{
+	"genericName": "Gather",
+	"description": "+50% gathering rate",
+	"cost": {"food": 0, "wood": 500, "stone": 300, "metal": 500},
+	"requirements": {"tech": "phase_village"},
+	"supersedes": "eco_gather_wood",
+	"icon": "plow.png",
+	"researchTime": 60,
+	"tooltip": "...",
+	"modifications": [
+		{"value": "RessourceGatherer/Rates/wood.tree", "multiply": 1.5}
+		{"value": "RessourceGatherer/Rates/stone.rock", "multiply": 1.5}
+		{"value": "RessourceGatherer/Rates/metal.ore", "multiply": 1.5}
+	],
+	"affects": ["Worker"],
+	"soundComplete": "interface/alarm/alarm_upgradearmory.xml"
+}
+
