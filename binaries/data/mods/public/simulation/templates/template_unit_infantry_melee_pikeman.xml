@@ -2,31 +2,19 @@
 <Entity parent="template_unit_infantry_melee">
   <Armour>
     <Hack>10</Hack>
-    <Pierce>8</Pierce>
+    <Pierce>12</Pierce>
     <Crush>8</Crush>
   </Armour>
   <Attack>
     <Melee>
-      <Hack>5.0</Hack>
-      <Pierce>0.0</Pierce>
+      <Hack>0.0</Hack>
+      <Pierce>5.0</Pierce>
       <MaxRange>8.0</MaxRange>
-	  <Bonuses>
-		<BonusCavMelee>
-		  <Classes>Cavalry</Classes>
-		  <Multiplier>2.0</Multiplier>
-		</BonusCavMelee>
-	  </Bonuses>
     </Melee>
     <Charge>
       <Hack>10.0</Hack>
       <Pierce>0.0</Pierce>
       <MaxRange>8.0</MaxRange>
-	  <Bonuses>
-		<BonusCharge>
-		  <Classes>Cavalry</Classes>
-		  <Multiplier>2.0</Multiplier>
-		</BonusCharge>
-	  </Bonuses>
     </Charge>
   </Attack>
   <Cost>

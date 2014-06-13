@@ -3,7 +3,7 @@
   <Armour>
     <Hack>1</Hack>
     <Pierce>1</Pierce>
-    <Crush>1</Crush>
+    <Crush>5</Crush>
   </Armour>
   <Cost>
     <Population>1</Population>

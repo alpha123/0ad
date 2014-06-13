@@ -12,13 +12,12 @@
       <Crush>0.0</Crush>
       <MaxRange>8.0</MaxRange>
       <RepeatTime>1000</RepeatTime>
-	  <Bonuses>
-		<BonusCavalry>
-		  <Classes>Cavalry</Classes>
-		  <Multiplier>2.0</Multiplier>
-		</BonusCavalry>
-	  </Bonuses>
     </Melee>
+    <Charge>
+      <Hack>20.0</Hack>
+      <Pierce>0.0</Pierce>
+      <MaxRange>8.0</MaxRange>
+    </Charge>
   </Attack>
   <Identity>
     <VisibleClasses datatype="tokens">Melee Spear Pike</VisibleClasses>

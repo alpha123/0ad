@@ -2,7 +2,7 @@
 <Entity parent="template_unit">
   <Armour>
     <Hack>1</Hack>
-    <Pierce>5</Pierce>
+    <Pierce>1</Pierce>
     <Crush>2</Crush>
   </Armour>
   <Attack>
@@ -15,7 +15,7 @@
   </Attack>
   <Cost>
     <Population>1</Population>
-    <BuildTime>15</BuildTime>
+    <BuildTime>12</BuildTime>
     <Resources>
       <food>80</food>
     </Resources>
