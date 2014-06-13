@@ -10,11 +10,8 @@
       <Hack>30.0</Hack>
       <Pierce>0.0</Pierce>
       <Crush>0.0</Crush>
-<<<<<<< HEAD
-=======
       <MaxRange>5.0</MaxRange>
       <RepeatTime>1000</RepeatTime>
->>>>>>> 4b4d0bc
     </Melee>
     <Charge>
       <Hack>60.0</Hack>

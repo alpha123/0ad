@@ -14,13 +14,6 @@
       <RepeatTime>1000</RepeatTime>
       <PreferredClasses datatype="tokens">Organic Siege</PreferredClasses>
     </Melee>
-    <Charge>
-      <Hack>90.0</Hack>
-      <Pierce>0.0</Pierce>
-      <Crush>0.0</Crush>
-      <MaxRange>6.0</MaxRange>
-      <PreferredClasses datatype="tokens">Organic Siege</PreferredClasses>
-    </Charge>
   </Attack>
   <Identity>
     <VisibleClasses datatype="tokens">Melee Spear</VisibleClasses>
