@@ -8,8 +8,8 @@
   <Attack>
     <Ranged>
       <Hack>0.0</Hack>
-      <Pierce>5.0</Pierce>
-      <Crush>10.0</Crush>
+      <Pierce>8.0</Pierce>
+      <Crush>2.0</Crush>
       <MaxRange>48.0</MaxRange>
       <MinRange>0.0</MinRange>
       <ProjectileSpeed>60.0</ProjectileSpeed>
@@ -24,10 +24,9 @@
     </Resources>
   </Cost>
   <Identity>
-    <Classes datatype="tokens">Sling</Classes>
+    <VisibleClasses datatype="tokens">Sling</VisibleClasses>
     <GenericName>Slinger</GenericName>
-    <Tooltip>Classes: Citizen Ranged Infantry Slinger.
-Counters: 1.5x vs. Ranged Infantry, 1.25x vs. Melee Infantry.
+    <Tooltip>Counters: 1.5x vs. Ranged Infantry, 1.25x vs. Melee Infantry.
 Countered by: Cavalry.</Tooltip>
   </Identity>
   <Loot>

@@ -216,8 +216,19 @@ m.TransportPlan.prototype.onBoarding = function(gameState)
 			else
 			{
 				var distShip = API3.SquareVectorDistance(self.boardingPos[shipId], ship.position());
-				if (time - ship.getMetadata(PlayerID, "timeGarrison") > 10000 && distShip > 225)
+				if (time - ship.getMetadata(PlayerID, "timeGarrison") > 8000 && distShip > 225)
 				{
+					if (!self.nTry[shipId])
+						self.nTry[shipId] = 1;
+					else
+						++self.nTry[shipId];
+					if (self.nTry[shipId] > 1)	// we must have been blocked by something ... try with another boarding point
+					{
+						self.nTry[shipId] = 0;
+						if (self.debug > 0)
+							warn(shipId + " new attempt for a landing point ");
+						self.boardingPos[shipId] = self.getBoardingPos(gameState, self.startIndex, self.sea, undefined, false);
+					}
 					ship.move(self.boardingPos[shipId][0], self.boardingPos[shipId][1]);
 					ship.setMetadata(PlayerID, "timeGarrison", time);				
 				}
@@ -315,7 +326,7 @@ m.TransportPlan.prototype.getBoardingPos = function(gameState, landIndex, seaInd
 			dist += API3.SquareVectorDistance(pos, destination);
 		if (avoidEnnemy)
 		{
-			var territoryOwner = gameState.ai.HQ.territoryMap.getOwner(pos);
+			var territoryOwner = gameState.ai.HQ.territoryMap.getOwnerIndex(i);
 			if (territoryOwner != 0 && !gameState.isPlayerAlly(territoryOwner))
 				dist += 100000000;
 		}
@@ -337,7 +348,7 @@ m.TransportPlan.prototype.onSailing = function(gameState)
 	var self = this;
 
 	// Check that the units recovered on the previous turn have been reloaded
-	for each (var recov in this.recovered)
+	for (var recov of this.recovered)
 	{
 		var ent = gameState.getEntityById(recov.entId);
 		if (!ent)  // entity destroyed
@@ -353,7 +364,7 @@ m.TransportPlan.prototype.onSailing = function(gameState)
 			warn(">>> reloading failed ... <<<");
 		// destroy the unit if inaccessible otherwise leave it 
 		var index = gameState.ai.accessibility.getAccessValue(ent.position());
-		if (gameState.ai.HQ.allowedRegions.indexOf(index) !== -1)
+		if (gameState.ai.HQ.allowedRegions[index])
 		{
 			ent.setMetadata(PlayerID, "transport", undefined);
 			ent.setMetadata(PlayerID, "onBoard", undefined);
@@ -372,7 +383,7 @@ m.TransportPlan.prototype.onSailing = function(gameState)
 
 	// Check that the units unloaded on the previous turn have been really unloaded
 	var shipsToMove = {};
-	for each (var entId in this.unloaded)
+	for (var entId of this.unloaded)
 	{
 		var ent = gameState.getEntityById(entId);
 		if (!ent)  // entity destroyed
@@ -469,14 +480,11 @@ m.TransportPlan.prototype.onSailing = function(gameState)
 
 		if (dist > 225)
 		{
-			if (self.debug > 0)
-				warn(shipId + " ship at distance " + dist + " avec state " + ship.unitAIState() + " et isIdle " + ship.isIdle());
-			// we must have been blocked by something ... try again and then try with another boarding point
 			if (!self.nTry[shipId])
 				self.nTry[shipId] = 1;
 			else
 				++self.nTry[shipId];
-			if (self.nTry[shipId] > 2)
+			if (self.nTry[shipId] > 2)	// we must have been blocked by something ... try with another boarding point
 			{
 				self.nTry[shipId] = 0;
 				if (self.debug > 0)

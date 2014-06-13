@@ -23,13 +23,8 @@
     </Charge>
   </Attack>
   <Identity>
-    <Classes datatype="tokens">Melee Spear</Classes>
+    <VisibleClasses datatype="tokens">Melee Spear</VisibleClasses>
     <GenericName>Hero Cavalry Spearman</GenericName>
-    <RequiredTechnology>phase_city</RequiredTechnology>
-	<Tooltip>Classes: Hero Melee Cavalry Spear.
-"Hero" Aura: TBD.
-Counters: 2x vs. Swordsmen and Siege Weapons, 1.5x vs. Skirmishers.
-Countered by: Spearmen, Archers, and Elephants.</Tooltip>
   </Identity>
   <Loot>
     <xp>500</xp>

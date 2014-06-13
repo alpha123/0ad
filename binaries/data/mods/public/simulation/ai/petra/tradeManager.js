@@ -131,12 +131,12 @@ m.TradeManager.prototype.buildTradeRoute = function(gameState, queues)
 	var distmax = -1;
 	var imax = -1;
 	var jmax = -1;
-	for each (var m1 in market1)
+	for (var m1 of market1)
 	{
 		if (!m1.position())
 			continue;
 		var index1 = gameState.ai.accessibility.getAccessValue(m1.position());
-		for each (var m2 in market2)
+		for (var m2 of market2)
 		{
 			if (m1.id() === m2.id())
 				continue;
@@ -146,7 +146,7 @@ m.TradeManager.prototype.buildTradeRoute = function(gameState, queues)
 			if (m2.hasClass("Dock") && m2.getMetadata(PlayerID, "sea") === undefined)
 			{
 				// m2 may-be an allied dock, without sea already affected to it
-				var sea = gameState.ai.HQ.navalManager.getDockSeaIndex(gameState, m2);
+				var sea = gameState.ai.HQ.navalManager.getDockIndex(gameState, m2, true);
 				m2.setMetadata(PlayerID, "sea", sea);
 			}
 			if (index1 !== index2 && !(m1.hasClass("Dock") && m2.hasClass("Dock") && m1.getMetadata(PlayerID, "sea") === m2.getMetadata(PlayerID, "sea")))
@@ -184,9 +184,14 @@ m.TradeManager.prototype.setTradingGoods = function(gameState)
 		if (stocks[type] < 200)
 		{
 			tradingGoods[type] = 20;
-			this.targetNumTraders += 2;
+			this.targetNumTraders += 3;
 		}
 		else if (stocks[type] < 500)
+		{
+			tradingGoods[type] = 15;
+			this.targetNumTraders += 2;
+		}
+		else if (stocks[type] < 1000)
 		{
 			tradingGoods[type] = 10;
 			this.targetNumTraders += 1;
@@ -230,7 +235,7 @@ m.TradeManager.prototype.performBarter = function(gameState)
 	var getBarterRate = function (prices,buy,sell) { return Math.round(100 * prices["sell"][sell] / prices["buy"][buy]); };
 
 	// loop through each queues checking if we could barter and help finishing a queue quickly.
-	for each (var buy in needs.types)
+	for (var buy of needs.types)
 	{
 		if (needs[buy] == 0 || needs[buy] < rates[buy]*30) // check if our rate allows to gather it fast enough
 			continue;
@@ -238,7 +243,7 @@ m.TradeManager.prototype.performBarter = function(gameState)
 		// pick the best resource to barter.
 		var bestToSell = undefined;
 		var bestRate = 0;
-		for each (var sell in needs.types)
+		for (var sell of needs.types)
 		{
 			if (sell === buy)
 				continue;
@@ -287,12 +292,15 @@ m.TradeManager.prototype.performBarter = function(gameState)
 		return false;
 	var bestToBuy = undefined;
 	var bestChoice = 0;
-	for each (var buy in needs.types)
+	for (var buy of needs.types)
 	{
 		if (buy === "food")
 			continue;
+		var barterRateMin = 80;
+		if (available[buy] < 5000 && available["food"] > 5000)
+			barterRateMin -= (20 - Math.floor(available[buy]/250));
 		var barterRate = getBarterRate(prices, buy, "food");
-		if (barterRate < 80)
+		if (barterRate < barterRateMin)
 			continue;
 		var choice = barterRate / (100 + available[buy]);
 		if (choice > bestChoice)
@@ -334,6 +342,10 @@ m.TradeManager.prototype.update = function(gameState, queues)
 		this.setTradingGoods(gameState);
 	this.trainMoreTraders(gameState, queues);
 	this.traders.forEach(function(ent) { self.updateTrader(ent) });
+
+	if (!this.tradeRoute || gameState.ai.playedTurn % 20 !== 10)
+		return;
+	gameState.ai.HQ.researchManager.researchTradeBonus(gameState, queues)
 };
 
 return m;

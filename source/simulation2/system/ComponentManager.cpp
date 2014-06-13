@@ -139,7 +139,8 @@ bool CComponentManager::LoadScript(const VfsPath& filename, bool hotload)
 	m_CurrentlyHotloading = hotload;
 	CVFSFile file;
 	PSRETURN loadOk = file.Load(g_VFS, filename);
-	ENSURE(loadOk == PSRETURN_OK); // TODO
+	if (loadOk != PSRETURN_OK) // VFS will log the failed file and the reason
+		return false;
 	std::string content = file.DecodeUTF8(); // assume it's UTF-8
 	bool ok = m_ScriptInterface.LoadScript(filename, content);
 	return ok;
@@ -646,6 +647,7 @@ void CComponentManager::AddSystemComponents(bool skipScriptedComponents, bool sk
 	AddComponent(m_SystemEntity, CID_SoundManager, noParam);
 	AddComponent(m_SystemEntity, CID_Terrain, noParam);
 	AddComponent(m_SystemEntity, CID_TerritoryManager, noParam);
+	AddComponent(m_SystemEntity, CID_UnitRenderer, noParam);
 	AddComponent(m_SystemEntity, CID_WaterManager, noParam);
 
 	// Add scripted system components:

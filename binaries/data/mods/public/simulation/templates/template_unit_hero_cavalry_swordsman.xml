@@ -7,6 +7,14 @@
   </Armour>
   <Attack>
     <Melee>
+<<<<<<< HEAD
+=======
+     <Hack>30.0</Hack>
+     <Pierce>0.0</Pierce>
+     <Crush>0.0</Crush>
+     <MaxRange>6.0</MaxRange>
+     <RepeatTime>1000</RepeatTime>
+>>>>>>> 4b4d0bc
       <PreferredClasses datatype="tokens">Organic Siege</PreferredClasses>
     </Melee>
     <Charge>
@@ -14,12 +22,7 @@
     </Charge>
   </Attack>
   <Identity>
-    <Classes datatype="tokens">Sword</Classes>
+    <VisibleClasses datatype="tokens">Melee Sword</VisibleClasses>
     <GenericName>Hero Cavalry Swordsman</GenericName>
-    <RequiredTechnology>phase_city</RequiredTechnology>
-    <Tooltip>Classes: Hero Melee Cavalry Sword.
-"Hero" Aura: TBD.
-Counters: 2x vs. Archers, All Support Units, and Siege Weapons.
-Countered by: Spearmen, Cavalry Skirmishers, and Elephants.</Tooltip>
   </Identity>
 </Entity>

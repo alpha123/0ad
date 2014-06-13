@@ -33,10 +33,9 @@
     <Max>230</Max>
   </Health>
   <Identity>
-    <Classes datatype="tokens">Melee Spear</Classes>
+    <VisibleClasses datatype="tokens">Melee Spear</VisibleClasses>
     <GenericName>Champion Cavalry Spearman</GenericName>
-	<Tooltip>Classes: Champion Melee Cavalry Spearman.
-Counters: 2x vs. Swordsmen and Siege Weapons, 1.5x vs. Skirmishers.
+	<Tooltip>Counters: 2x vs. Swordsmen and Siege Weapons, 1.5x vs. Skirmishers.
 Countered by: Spearmen, Archers, and Elephants.</Tooltip>
   </Identity>
 </Entity>
