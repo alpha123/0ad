@@ -3,16 +3,16 @@
   <Armour>
     <Hack>5</Hack>
     <Pierce>15</Pierce>
-    <Crush>5</Crush>
+    <Crush>15</Crush>
   </Armour>
   <Cost>
     <Population>3</Population>
     <BuildTime>20</BuildTime>
     <Resources>
-      <food>150</food>
+      <food>250</food>
       <wood>0</wood>
       <stone>0</stone>
-      <metal>150</metal>
+      <metal>250</metal>
     </Resources>
   </Cost>
   <Footprint>
@@ -20,7 +20,7 @@
     <Height>6.0</Height>
   </Footprint>
   <Health>
-    <Max>400</Max>
+    <Max>750</Max>
   </Health>
   <Identity>
     <VisibleClasses datatype="tokens">Elephant</VisibleClasses>
