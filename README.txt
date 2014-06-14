@@ -45,3 +45,29 @@ Reporting problems
 
 Bugs should be reported on Trac. For information on reporting problems
 and finding logs, see http://trac.wildfiregames.com/wiki/ReportingErrors
+
+--------------------------------
+Changelog - Differences from SVN
+--------------------------------
+
+Units
+- Cavalry have been made weaker to pierce damage, but more resilient against hack.
+- Rams can now attack all units. In compensation, all organic units get a default of 3 Crush armor.
+- Ballistas and Onager have a much longer range and vision.
+- Healers now cost only food since metal is quite rare.
+- Elephants now are significantly stronger but more expensive.
+- The basic formations have been disabled for the time being.
+- Female Citizens train much faster.
+- Elite Iberian Skirmishers have been nerfed.
+- All units attack faster.
+- Singers deal both crush and pierce damage.
+- All hard bonuses have been taken out.
+
+Structures
+- All structures are now weaker against crush and hack damage.
+- Civic Centers have a better garrison multiplier in an attempt to combat 2v1 rushes.
+- Walls and Wall Towers take significantly longer to build.
+
+Technologies
+- Some technologies have been made expensive (wip)
+- Phasing now increases attack to all units.
