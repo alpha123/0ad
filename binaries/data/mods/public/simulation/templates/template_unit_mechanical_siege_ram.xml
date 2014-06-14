@@ -3,7 +3,7 @@
   <Armour>
     <Hack>1</Hack>
     <Pierce>40</Pierce>
-    <Crush>10</Crush>
+    <Crush>1</Crush>
   </Armour>
   <Attack>
     <Melee>
