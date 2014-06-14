@@ -31,8 +31,6 @@
       units/rome_cavalry_javelinist_b
 	  units/rome_champion_cavalry_barracks
     </Entities>
-    <Technologies datatype="tokens">
-    </Technologies>
   </ProductionQueue>
   <VisualActor>
     <Actor>structures/romans/barracks.xml</Actor>
