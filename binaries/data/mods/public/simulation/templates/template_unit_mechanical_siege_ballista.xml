@@ -10,7 +10,7 @@
       <Hack>0.0</Hack>
       <Pierce>30.0</Pierce>
       <Crush>20.0</Crush>
-      <MaxRange>80</MaxRange>
+      <MaxRange>120</MaxRange>
       <MinRange>8.0</MinRange>
       <Spread>2.0</Spread>
       <ProjectileSpeed>300.0</ProjectileSpeed>
@@ -70,6 +70,6 @@ Countered by: Melee Cavalry.</Tooltip>
     </Run>
   </UnitMotion>
   <Vision>
-    <Range>70</Range>
+    <Range>150</Range>
   </Vision>
 </Entity>
