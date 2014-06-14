@@ -13,10 +13,6 @@
       <MaxRange>5.0</MaxRange>
       <RepeatTime>1000</RepeatTime>
     </Melee>
-    <Charge>
-      <Hack>60.0</Hack>
-      <Pierce>0.0</Pierce>
-    </Charge>
   </Attack>
   <Identity>
     <VisibleClasses datatype="tokens">Melee Spear</VisibleClasses>
