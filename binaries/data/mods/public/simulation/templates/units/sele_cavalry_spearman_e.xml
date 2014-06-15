@@ -5,12 +5,14 @@
     <Pierce>3</Pierce>
     <Crush>4</Crush>
   </Armour>
-  <Attack>
+    <Attack>
     <Melee>
-      <Hack>14.0</Hack>
+      <Hack>7.0</Hack>
+      <Pierce>13.0</Pierce>
     </Melee>
     <Charge>
-      <Hack>42.0</Hack>
+      <Hack>14.0</Hack>
+      <Pierce>26.0</Pierce>
     </Charge>
   </Attack>
   <Health>
