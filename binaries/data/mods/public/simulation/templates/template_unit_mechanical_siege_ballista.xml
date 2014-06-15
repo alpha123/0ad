@@ -10,7 +10,7 @@
       <Hack>0.0</Hack>
       <Pierce>100.0</Pierce>
       <Crush>20.0</Crush>
-      <MaxRange>100</MaxRange>
+      <MaxRange>80</MaxRange>
       <MinRange>8.0</MinRange>
       <Spread>2.0</Spread>
       <ProjectileSpeed>300.0</ProjectileSpeed>
@@ -39,7 +39,7 @@
     <Height>2.0</Height>
   </Footprint>
   <Health>
-    <Max>300</Max>
+    <Max>200</Max>
   </Health>
   <Identity>
     <GenericName>Bolt Shooter</GenericName>
@@ -70,6 +70,6 @@ Countered by: Melee Cavalry.</Tooltip>
     </Run>
   </UnitMotion>
   <Vision>
-    <Range>150</Range>
+    <Range>120</Range>
   </Vision>
 </Entity>

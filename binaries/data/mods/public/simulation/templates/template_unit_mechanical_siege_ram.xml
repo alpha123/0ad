@@ -3,7 +3,7 @@
   <Armour>
     <Hack>1</Hack>
     <Pierce>40</Pierce>
-    <Crush>1</Crush>
+    <Crush>5</Crush>
   </Armour>
   <Attack>
     <Melee>
@@ -27,8 +27,8 @@
     <BuildTime>20</BuildTime>
     <Population>5</Population>
     <Resources>
-      <wood>200</wood>
-      <metal>100</metal>
+      <wood>350</wood>
+      <metal>200</metal>
     </Resources>
   </Cost>
   <GarrisonHolder>
@@ -40,7 +40,7 @@
     <LoadingRange>2</LoadingRange>
   </GarrisonHolder>
   <Health>
-    <Max>150</Max>
+    <Max>500</Max>
   </Health>
   <Identity>
     <GenericName>Battering Ram</GenericName>
@@ -69,6 +69,6 @@ Countered by: Melee Cavalry. Cannot attack organic units (but can attack other s
     </Run>
   </UnitMotion>
   <Vision>
-    <Range>48</Range>
+    <Range>80</Range>
   </Vision>
 </Entity>
