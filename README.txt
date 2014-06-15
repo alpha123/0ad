@@ -43,8 +43,7 @@ http://trac.wildfiregames.com/wiki/BuildInstructions
 Reporting problems
 ------------------
 
-Bugs should be reported on Trac. For information on reporting problems
-and finding logs, see http://trac.wildfiregames.com/wiki/ReportingErrors
+Bugs should be reported on the github. See https://github.com/scythetwirler/0ad/issues.
 
 --------------------------------
 Changelog - Differences from SVN
