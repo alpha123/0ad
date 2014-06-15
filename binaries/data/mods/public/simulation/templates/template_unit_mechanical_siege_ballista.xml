@@ -2,13 +2,13 @@
 <Entity parent="template_unit_mechanical_siege">
   <Armour>
     <Hack>2</Hack>
-    <Pierce>20</Pierce>
+    <Pierce>30</Pierce>
     <Crush>1</Crush>
   </Armour>
   <Attack>
     <Ranged>
       <Hack>0.0</Hack>
-      <Pierce>30.0</Pierce>
+      <Pierce>100.0</Pierce>
       <Crush>20.0</Crush>
       <MaxRange>120</MaxRange>
       <MinRange>8.0</MinRange>
@@ -29,8 +29,8 @@
   <Cost>
     <BuildTime>18</BuildTime>
     <Resources>
-      <wood>100</wood>
-      <metal>100</metal>
+      <wood>250</wood>
+      <metal>250</metal>
     </Resources>
     <Population>2</Population>
   </Cost>
@@ -39,7 +39,7 @@
     <Height>2.0</Height>
   </Footprint>
   <Health>
-    <Max>250</Max>
+    <Max>300</Max>
   </Health>
   <Identity>
     <GenericName>Bolt Shooter</GenericName>
