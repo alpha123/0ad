@@ -54,9 +54,10 @@ Units
 - Cavalry have been made weaker to pierce damage, but more resilient against hack.
 - Rams can now attack all units. In compensation, all organic units get a default of 3 Crush armor.
 - Ballistas and Onager have a much longer range and vision.
+- Ballistas deal much more damage.
 - Healers now cost only food since metal is quite rare.
 - Elephants now are significantly stronger but more expensive.
-- The basic formations have been disabled for the time being.
+- The basic formations have been disabled for the time being (with a surprising performance benefit).
 - Female Citizens train much faster.
 - Elite Iberian Skirmishers have been nerfed.
 - All units attack faster.
@@ -67,7 +68,9 @@ Structures
 - All structures are now weaker against crush and hack damage.
 - Civic Centers have a better garrison multiplier in an attempt to combat 2v1 rushes.
 - Walls and Wall Towers take significantly longer to build.
+- Significantly nerfed the Roman Entrenched Army Camp.
 
 Technologies
 - Some technologies have been made expensive (wip)
+- Added a powerful tech to the wonder.
 - Phasing now increases attack to all units.
