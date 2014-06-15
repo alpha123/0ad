@@ -1,5 +1,4 @@
 {
-	"pair": "pair_gather_03",	
 	"genericName": "Slaves",
 	"specificName": {
 		"hele": "Andrapodon",
@@ -9,6 +8,7 @@
 	},
 	"description": "Increases stone gathering rates.",
 	"cost": {"food": 1000, "wood": 0, "stone": 150, "metal": 150},
+	"supersedes": "gather_mining_serfs",
 	"requirements": {"tech": "phase_city"},
 	"requirementsTooltip": "Unlocked in City Phase.",
 	"icon": "mining_stone.png",

@@ -1,5 +1,4 @@
 {
-	"pair": "pair_gather_01",	
 	"genericName": "Wedge and Mallet",
 	"description": "Increases metal gathering rates.",
 	"cost": {"food": 0, "wood": 200, "stone": 0, "metal": 50},

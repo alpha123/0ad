@@ -1,5 +1,4 @@
 {
-	"pair": "pair_gather_03",	
 	"genericName": "Silver Mining",
 	"specificName": {
 		"athen": "Mines of Laureion",
@@ -7,6 +6,7 @@
 	},
 	"description": "Increases metal gathering rates.",
 	"cost": {"food": 0, "wood": 1000, "stone": 150, "metal": 150},
+	"supersedes": "gather_mining_shaftmining",
 	"requirements": {"tech": "phase_city"},
 	"requirementsTooltip": "Unlocked in City Phase.",
 	"icon": "mining_metal.png",

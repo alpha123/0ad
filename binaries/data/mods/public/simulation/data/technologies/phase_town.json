@@ -7,6 +7,6 @@
 		{"value": "Attack/Melee/Pierce", "multiply": 1.2, "affects": "CitizenSoldier Melee"},
 		{"value": "Attack/Ranged/Pierce", "multiply": 1.2, "affects": "CitizenSoldier Ranged"},
 		{"value": "Attack/Ranged/Crush", "multiply": 1.2, "affects": "CitizenSoldier Ranged"}],
-	"affects": ["CivCentre"],
+	"affects": ["CivCentre", "Infantry", "Cavalry"], 
 	"soundComplete": "interface/alarm/alarm_phase.xml"
 }
