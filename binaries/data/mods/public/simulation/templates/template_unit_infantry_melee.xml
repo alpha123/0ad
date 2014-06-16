@@ -19,7 +19,7 @@
     </Charge>
   </Attack>
   <Health>
-    <Max>100</Max>
+    <Max>120</Max>
   </Health>
   <Identity>
     <GenericName>Melee Infantry</GenericName>
