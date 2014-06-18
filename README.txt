@@ -62,14 +62,17 @@ Units
 - All units attack faster.
 - Singers deal both crush and pierce damage.
 - All hard bonuses have been taken out.
+- Swordsmen cost less metal, but cost a little wood.
 
 Structures
 - All structures are now weaker against crush and hack damage.
 - Civic Centers have a better garrison multiplier in an attempt to combat 2v1 rushes.
 - Walls and Wall Towers take significantly longer to build.
 - Significantly nerfed the Roman Entrenched Army Camp.
+- Farms have increased HP and more armor against hack and pierce attacks.
 
 Technologies
 - Some technologies have been made expensive (wip)
+- Some pair technologies have been unpaired.
 - Added a powerful tech to the wonder.
 - Phasing now increases attack to all units.
