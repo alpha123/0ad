@@ -9,7 +9,7 @@
     <Melee>
       <Hack>0.0</Hack>
       <Pierce>0.0</Pierce>
-      <Crush>50.0</Crush>
+      <Crush>80.0</Crush>
       <MaxRange>6.5</MaxRange>
       <RepeatTime>1500</RepeatTime>
       <PreferredClasses datatype="tokens">Gates Structure</PreferredClasses>
@@ -17,7 +17,7 @@
     <Charge>
       <Hack>0.0</Hack>
       <Pierce>0.0</Pierce>
-      <Crush>100.0</Crush>
+      <Crush>160.0</Crush>
       <MaxRange>6.5</MaxRange>
       <MinRange>0.0</MinRange>
       <PreferredClasses datatype="tokens">Gates Structure</PreferredClasses>
