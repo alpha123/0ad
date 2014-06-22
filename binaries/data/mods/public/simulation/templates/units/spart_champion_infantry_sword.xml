@@ -2,12 +2,10 @@
 <Entity parent="template_unit_infantry_melee_swordsman">
   <Attack>
     <Melee>
-      <Hack>8.0</Hack>
-      <Pierce>16.0</Pierce>
+      <Hack>16.0</Hack>
     </Melee>
     <Charge>
-      <Hack>16.0</Hack>
-      <Pierce>32.0</Pierce>
+      <Hack>32.0</Hack>
     </Charge>
   </Attack>
   <Builder>

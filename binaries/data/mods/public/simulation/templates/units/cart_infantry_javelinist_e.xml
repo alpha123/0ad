@@ -7,8 +7,10 @@
   </Armour>
   <Attack>
     <Ranged>
+      <Pierce>10.0</Pierce>
+      <Crush>10.0</Crush>
       <Spread>1.0</Spread>
-      <MaxRange>44</MaxRange>
+      <MaxRange>48</MaxRange>
     </Ranged>
   </Attack>
   <Health>
@@ -28,6 +30,6 @@
     </Run>
   </UnitMotion>
   <VisualActor>
-    <Actor>units/carthaginians/infantry_javelinist_e.xml</Actor>
+    <Actor>units/iberians/infantry_javelinist_e.xml</Actor>
   </VisualActor>
 </Entity>
