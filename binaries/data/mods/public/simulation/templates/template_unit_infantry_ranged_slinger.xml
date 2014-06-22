@@ -9,7 +9,7 @@
     <Ranged>
       <Hack>0.0</Hack>
       <Pierce>8.0</Pierce>
-      <Crush>2.0</Crush>
+      <Crush>3.0</Crush>
       <MaxRange>48.0</MaxRange>
       <MinRange>0.0</MinRange>
       <ProjectileSpeed>60.0</ProjectileSpeed>
