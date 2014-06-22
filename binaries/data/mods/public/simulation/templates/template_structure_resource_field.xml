@@ -9,7 +9,7 @@
     <Category>Field</Category>
   </BuildRestrictions>
   <Cost>
-    <BuildTime>100</BuildTime>
+    <BuildTime>50</BuildTime>
     <Resources>
       <wood>100</wood>
     </Resources>
