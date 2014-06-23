@@ -3,10 +3,7 @@
 	"requirements": { "any": [{"tech":"phase_town_generic"}, {"tech":"phase_town_athen"}]},
 	"autoResearch": true,
 	"modifications": [{"value": "TerritoryInfluence/Radius", "multiply": 1.30},
-		{"value": "Attack/Melee/Hack", "multiply": 1.2, "affects": "CitizenSoldier Melee"},
-		{"value": "Attack/Melee/Pierce", "multiply": 1.2, "affects": "CitizenSoldier Melee"},
-		{"value": "Attack/Ranged/Pierce", "multiply": 1.2, "affects": "CitizenSoldier Ranged"},
-		{"value": "Attack/Ranged/Crush", "multiply": 1.2, "affects": "CitizenSoldier Ranged"}],
+		{"value": "Health/Max", "multiply": 1.2, "affects": "CitizenSoldier"}],
 	"affects": ["CivCentre", "Infantry", "Cavalry"], 
 	"soundComplete": "interface/alarm/alarm_phase.xml"
 }

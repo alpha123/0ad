@@ -75,4 +75,4 @@ Technologies
 - Some technologies have been made expensive (wip)
 - Some pair technologies have been unpaired.
 - Added a powerful tech to the wonder.
-- Phasing now increases attack to all units.
+- Phasing now increases health to all citizen soldiers.
