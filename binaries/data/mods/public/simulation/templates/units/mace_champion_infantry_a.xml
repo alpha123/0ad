@@ -3,23 +3,9 @@
   <Attack>
     <Melee>
       <MaxRange>6.0</MaxRange>
-	  <Bonuses>
-		<BonusPersians>
-		  <Civ>pers</Civ>
-		  <Classes></Classes>
-		  <Multiplier>1.25</Multiplier>
-		</BonusPersians>
-	  </Bonuses>
     </Melee>
     <Charge>
       <MaxRange>6.0</MaxRange>
-	  <Bonuses>
-		<BonusPersians>
-		  <Civ>pers</Civ>
-		  <Classes></Classes>
-		  <Multiplier>1.25</Multiplier>
-		</BonusPersians>
-	  </Bonuses>
     </Charge>
   </Attack>
   <Health>

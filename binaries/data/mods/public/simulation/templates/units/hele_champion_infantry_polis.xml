@@ -8,83 +8,9 @@
   <Attack>
     <Melee>
       <MaxRange>6.0</MaxRange>
-	  <Bonuses>
-		<BonusCarths>
-		  <Civ>cart</Civ>
-		  <Classes></Classes>
-		  <Multiplier>1.1</Multiplier>
-		</BonusCarths>
-		<BonusBritons>
-		  <Civ>brit</Civ>
-		  <Classes></Classes>
-		  <Multiplier>1.1</Multiplier>
-		</BonusBritons>
-		<BonusGauls>
-		  <Civ>gaul</Civ>
-		  <Classes></Classes>
-		  <Multiplier>1.1</Multiplier>
-		</BonusGauls>
-		<BonusMauryans>
-		  <Civ>maur</Civ>
-		  <Classes></Classes>
-		  <Multiplier>1.1</Multiplier>
-		</BonusMauryans>
-		<BonusIberians>
-		  <Civ>iber</Civ>
-		  <Classes></Classes>
-		  <Multiplier>1.1</Multiplier>
-		</BonusIberians>
-		<BonusPersians>
-		  <Civ>pers</Civ>
-		  <Classes></Classes>
-		  <Multiplier>1.1</Multiplier>
-		</BonusPersians>
-		<BonusRomans>
-		  <Civ>rome</Civ>
-		  <Classes></Classes>
-		  <Multiplier>1.1</Multiplier>
-		</BonusRomans>
-	  </Bonuses>
     </Melee>
     <Charge>
       <MaxRange>6.0</MaxRange>
-	  <Bonuses>
-		<BonusCarths>
-		  <Civ>cart</Civ>
-		  <Classes></Classes>
-		  <Multiplier>1.1</Multiplier>
-		</BonusCarths>
-		<BonusBritons>
-		  <Civ>brit</Civ>
-		  <Classes></Classes>
-		  <Multiplier>1.1</Multiplier>
-		</BonusBritons>
-		<BonusGauls>
-		  <Civ>gaul</Civ>
-		  <Classes></Classes>
-		  <Multiplier>1.1</Multiplier>
-		</BonusGauls>
-		<BonusMauryans>
-		  <Civ>maur</Civ>
-		  <Classes></Classes>
-		  <Multiplier>1.1</Multiplier>
-		</BonusMauryans>
-		<BonusIberians>
-		  <Civ>iber</Civ>
-		  <Classes></Classes>
-		  <Multiplier>1.1</Multiplier>
-		</BonusIberians>
-		<BonusPersians>
-		  <Civ>pers</Civ>
-		  <Classes></Classes>
-		  <Multiplier>1.1</Multiplier>
-		</BonusPersians>
-		<BonusRomans>
-		  <Civ>rome</Civ>
-		  <Classes></Classes>
-		  <Multiplier>1.1</Multiplier>
-		</BonusRomans>
-	  </Bonuses>
     </Charge>
   </Attack>
   <Cost>

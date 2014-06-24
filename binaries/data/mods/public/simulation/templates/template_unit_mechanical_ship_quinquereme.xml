@@ -10,7 +10,7 @@
       <ProjectileSpeed>28.0</ProjectileSpeed>
       <PrepareTime>2000</PrepareTime>
       <RepeatTime>5000</RepeatTime>
-      <Spread>6.0</Spread>
+      <Spread>0</Spread>
       <Splash>
         <Shape>Circular</Shape>
         <Range>8</Range>
