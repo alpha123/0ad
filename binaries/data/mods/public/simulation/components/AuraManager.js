@@ -27,7 +27,7 @@ AuraManager.prototype.ensureExists = function(name, value, id, key, defaultData)
 
 	if (!this[name][value][id][key])
 		this[name][value][id][key] = [];
-};
+}
 
 AuraManager.prototype.ApplyBonus = function(value, ent, data, key)
 {
@@ -140,9 +140,16 @@ AuraManager.prototype.ApplyTemplateModifications = function(valueName, value, pl
 	if (!this.templateModificationsCache[valueName] || !this.templateModificationsCache[valueName][player])
 		return value;
 
-	var classes = [];
+	var rawClasses;
 	if (template && template.Identity)
-		classes = GetIdentityClasses(template.Identity);
+	{
+		rawClasses = template.Identity.Classes;
+		rawClasses = "_string" in rawClasses ?  rawClasses._string : "";
+		if (template.Identity.Rank)
+			rawClasses += " " + template.Identity.Rank;
+	} 
+
+	var classes = rawClasses && rawClasses.length ? rawClasses.split(/\s+/) : [];
 
 	var keyList = [];
 

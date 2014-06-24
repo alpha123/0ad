@@ -2,18 +2,18 @@
 <Entity parent="template_unit_infantry_melee">
   <Armour>
     <Hack>10</Hack>
-    <Pierce>12</Pierce>
+    <Pierce>8</Pierce>
     <Crush>8</Crush>
   </Armour>
   <Attack>
     <Melee>
-      <Hack>4.0</Hack>
-      <Pierce>8.0</Pierce>
+      <Hack>5.0</Hack>
+      <Pierce>0.0</Pierce>
       <MaxRange>8.0</MaxRange>
     </Melee>
     <Charge>
-      <Hack>8.0</Hack>
-      <Pierce>16.0</Pierce>
+      <Hack>10.0</Hack>
+      <Pierce>0.0</Pierce>
       <MaxRange>8.0</MaxRange>
     </Charge>
   </Attack>
@@ -23,10 +23,11 @@
     </Resources>
   </Cost>
   <Identity>
-    <VisibleClasses datatype="tokens">Spear Pike</VisibleClasses>
+    <Classes datatype="tokens">Spear Pike</Classes>
     <GenericName>Pikeman</GenericName>
 	<History>Pike, or sarissa, infantry were developed by Philip II of Macedon based on the hoplite of the Greek city-states. The Macedonian pikemen, or phalangites, wielded an extra long spear (sarissa) approximatly 4 to 7 meters (13–21 feet) in length. Because of it's length and weight, the pike required the use of both hands, so the shield was slung over the pikeman's shoulder with a leather strap. Front-line pikemen of the age were generally highly-armored, while those in the back lines were lightly armored. Such pike-wielding troops were employed by numerous states, from Carthage to Syria, and were used to fix enemy infantry in position while the army's cavalry worked to turn the enemy flanks.</History>
-    <Tooltip>Counters: 2x vs. All Cavalry.
+    <Tooltip>Classes: Citizen Melee Infantry Spearman.
+Counters: 2x vs. All Cavalry.
 Countered by: Skirmishers, Swordsmen, Cavalry Archers.</Tooltip>
     <Formations datatype="tokens">
       formations/syntagma

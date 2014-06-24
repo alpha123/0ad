@@ -227,16 +227,6 @@ Attack.prototype.CanAttack = function(target)
 	if (cmpFormation)
 		return true;
 
-	var cmpThisPosition = Engine.QueryInterface(this.entity, IID_Position);
-	var cmpTargetPosition = Engine.QueryInterface(target, IID_Position);
-	if (!cmpThisPosition || !cmpTargetPosition || !cmpThisPosition.IsInWorld() || !cmpTargetPosition.IsInWorld())
-		return false;
-
-	// Check if the relative height difference is larger than the attack range
-	// If the relative height is bigger, it means they will never be able to
-	// reach each other, no matter how close they come.
-	var heightDiff = Math.abs(cmpThisPosition.GetHeightOffset() - cmpTargetPosition.GetHeightOffset());
-
 	const cmpIdentity = Engine.QueryInterface(target, IID_Identity);
 	if (!cmpIdentity) 
 		return undefined;
@@ -245,9 +235,6 @@ Attack.prototype.CanAttack = function(target)
 
 	for each (var type in this.GetAttackTypes())
 	{
-		if (heightDiff > this.GetRange(type).max)
-			continue;
-
 		var canAttack = true;
 		var restrictedClasses = this.GetRestrictedClasses(type);
 
@@ -448,8 +435,6 @@ Attack.prototype.PerformAttack = function(type, target)
 	// If this is a ranged attack, then launch a projectile
 	if (type == "Ranged")
 	{
-		var cmpTimer = Engine.QueryInterface(SYSTEM_ENTITY, IID_Timer);
-		var turnLength = cmpTimer.GetLatestTurnLength()/1000;
 		// In the future this could be extended:
 		//  * Obstacles like trees could reduce the probability of the target being hit
 		//  * Obstacles like walls should block projectiles entirely
@@ -475,7 +460,7 @@ Attack.prototype.PerformAttack = function(type, target)
 		var relativePosition = Vector3D.sub(targetPosition, selfPosition);
 		var previousTargetPosition = Engine.QueryInterface(target, IID_Position).GetPreviousPosition();
 
-		var targetVelocity = Vector3D.sub(targetPosition, previousTargetPosition).div(turnLength);
+		var targetVelocity = Vector3D.sub(targetPosition, previousTargetPosition).div(this.turnLength);
 		// the component of the targets velocity radially away from the archer
 		var radialSpeed = relativePosition.dot(targetVelocity) / relativePosition.length();
 
@@ -528,17 +513,15 @@ Attack.prototype.PerformAttack = function(type, target)
 
 Attack.prototype.InterpolatedLocation = function(ent, lateness)
 {
-	var cmpTimer = Engine.QueryInterface(SYSTEM_ENTITY, IID_Timer);
-	var turnLength = cmpTimer.GetLatestTurnLength()/1000;
 	var cmpTargetPosition = Engine.QueryInterface(ent, IID_Position);
 	if (!cmpTargetPosition || !cmpTargetPosition.IsInWorld()) // TODO: handle dead target properly
 		return undefined;
 	var curPos = cmpTargetPosition.GetPosition();
 	var prevPos = cmpTargetPosition.GetPreviousPosition();
 	lateness /= 1000;
-	return new Vector3D((curPos.x * (turnLength - lateness) + prevPos.x * lateness) / turnLength,
+	return new Vector3D((curPos.x * (this.turnLength - lateness) + prevPos.x * lateness) / this.turnLength,
 			0,
-	        (curPos.z * (turnLength - lateness) + prevPos.z * lateness) / turnLength);
+	        (curPos.z * (this.turnLength - lateness) + prevPos.z * lateness) / this.turnLength);
 };
 
 // Tests whether it point is inside of ent's footprint
@@ -576,7 +559,7 @@ Attack.prototype.MissileHit = function(data, lateness)
 	var targetPosition = this.InterpolatedLocation(data.target, lateness);
 	if (!targetPosition)
 		return;
-
+	
 	if (this.template.Ranged.Splash) // splash damage, do this first in case the direct hit kills the target
 	{
 		var friendlyFire = this.template.Ranged.Splash.FriendlyFire;
@@ -624,5 +607,10 @@ Attack.prototype.MissileHit = function(data, lateness)
 		}
 	}
 };
+
+Attack.prototype.OnUpdate = function(msg)
+{
+	this.turnLength = msg.turnLength;
+}
 
 Engine.RegisterComponentType(IID_Attack, "Attack", Attack);

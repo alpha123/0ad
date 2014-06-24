@@ -62,14 +62,6 @@ Identity.prototype.Schema =
 		"</element>" +
 	"</optional>" +
 	"<optional>" +
-		"<element name='VisibleClasses' a:help='Optional list of space-separated classes applying to this entity. These classes will also be visible in various GUI elements, if the classes need spaces. Underscores will be replaced with spaces.'>" +
-			"<attribute name='datatype'>" +
-				"<value>tokens</value>" +
-			"</attribute>" +
-			"<text/>" +
-		"</element>" +
-	"</optional>" +
-	"<optional>" +
 		"<element name='Formations' a:help='Optional list of space-separated formations this unit is allowed to use. Choices include: Scatter, Box, ColumnClosed, LineClosed, ColumnOpen, LineOpen, Flank, Skirmish, Wedge, Testudo, Phalanx, Syntagma, BattleLine'>" +
 			"<attribute name='datatype'>" +
 				"<value>tokens</value>" +
@@ -107,12 +99,11 @@ Identity.prototype.GetRank = function()
 
 Identity.prototype.GetClassesList = function()
 {
-	return GetIdentityClasses(this.template);
-};
-
-Identity.prototype.GetVisibleClassesList = function()
-{
-	return GetVisibleIdentityClasses(this.template);
+	if (this.template.Classes && "_string" in this.template.Classes)
+		return ( this.template.Classes._string + " " + this.GetRank() ).split(/\s+/);
+	if (this.GetRank().length)
+		return [this.GetRank()];
+	return [];
 };
 
 Identity.prototype.HasClass = function(name)
@@ -127,7 +118,10 @@ Identity.prototype.GetFormationsList = function()
 		var string = this.template.Formations._string;
 		return string.split(/\s+/);
 	}
-	return [];
+	else
+	{
+		return [];
+	}
 };
 
 Identity.prototype.CanUseFormation = function(template)

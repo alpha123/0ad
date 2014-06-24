@@ -102,7 +102,7 @@ public:
 	{
 		ScopedLock s;
 		VfsDirectory* directory;
-		RETURN_STATUS_IF_ERR(vfs_Lookup(path, &m_rootDirectory, directory, 0));
+		WARN_RETURN_STATUS_IF_ERR(vfs_Lookup(path, &m_rootDirectory, directory, 0));
 
 		if(fileInfos)
 		{

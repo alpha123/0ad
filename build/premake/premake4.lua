@@ -1038,9 +1038,6 @@ function setup_atlas_project(project_name, target_type, rel_source_dirs, rel_inc
 		buildoptions { "-rdynamic", "-fPIC" }
 		linkoptions { "-fPIC", "-rdynamic" }
 
-		-- warnings triggered by wxWidgets
-		buildoptions { "-Wno-unused-local-typedefs" }
-
 	elseif os.is("macosx") then
 		-- install_name settings aren't really supported yet by premake, but there are plans for the future.
 		-- we currently use this hack to work around some bugs with wrong install_names.
@@ -1069,7 +1066,6 @@ function setup_atlas_projects()
 		"../../../third_party/jsonspirit"
 	},{	-- extern_libs
 		"boost",
-		"iconv",
 		"libxml2",
 		"wxwidgets"
 	},{	-- extra_params
@@ -1113,7 +1109,6 @@ function setup_atlas_projects()
 		"boost",
 		"comsuppw",
 		--"ffmpeg", -- disabled for now because it causes too many build difficulties
-		"iconv",
 		"libxml2",
 		"sdl",	-- key definitions
 		"wxwidgets",
@@ -1257,7 +1252,6 @@ function setup_collada_projects()
 	},{	-- include
 	},{	-- extern_libs
 		"fcollada",
-		"iconv",
 		"libxml2"
 	},{	-- extra_params
 	})

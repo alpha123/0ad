@@ -288,10 +288,6 @@ ProductionQueue.prototype.AddBatch = function(templateName, type, count, metadat
 				"timeTotal": time*1000,
 				"timeRemaining": time*1000,
 			});
-			
-			// Call the related trigger event 
-			var cmpTrigger = Engine.QueryInterface(SYSTEM_ENTITY, IID_Trigger);
-			cmpTrigger.CallEvent("TrainingQueued", {"playerid": cmpPlayer.GetPlayerID(), "unitTemplate": templateName, "count": count, "metadata": metadata, "trainerEntity": this.entity});
 		}
 		else if (type == "technology")
 		{
@@ -328,10 +324,6 @@ ProductionQueue.prototype.AddBatch = function(templateName, type, count, metadat
 				"timeTotal": time*1000,
 				"timeRemaining": time*1000,
 			});
-			
-			// Call the related trigger event 
-			var cmpTrigger = Engine.QueryInterface(SYSTEM_ENTITY, IID_Trigger);
-			cmpTrigger.CallEvent("ResearchQueued", {"playerid": cmpPlayer.GetPlayerID(), "technologyTemplate": templateName, "researcherEntity": this.entity});
 		}
 		else
 		{
@@ -350,7 +342,7 @@ ProductionQueue.prototype.AddBatch = function(templateName, type, count, metadat
 	}
 	else
 	{
-		var notification = {"players": [cmpPlayer.GetPlayerID()], "message": markForTranslation("The production queue is full."), "translateMessage": true };
+		var notification = {"player": cmpPlayer.GetPlayerID(), "message": markForTranslation("The production queue is full."), "translateMessage": true };
 		var cmpGUIInterface = Engine.QueryInterface(SYSTEM_ENTITY, IID_GuiInterface);
 		cmpGUIInterface.PushNotification(notification);
 	}
@@ -440,7 +432,6 @@ ProductionQueue.prototype.GetQueue = function()
 			"count": item.count,
 			"neededSlots": item.neededSlots,
 			"progress": 1 - ( item.timeRemaining / (item.timeTotal || 1) ),
-			"timeRemaining": item.timeRemaining,
 			"metadata": item.metadata,
 		});
 	}
@@ -559,7 +550,7 @@ ProductionQueue.prototype.SpawnUnits = function(templateName, count, metadata)
 		if (cmpAutoGarrison && cmpAutoGarrison.PerformGarrison(ent))
 		{
 			var cmpUnitAI = Engine.QueryInterface(ent, IID_UnitAI);
-			cmpUnitAI.Autogarrison(this.entity);
+			cmpUnitAI.Autogarrison();
 		}
 		else
 		{
@@ -673,8 +664,6 @@ ProductionQueue.prototype.ProgressTimeout = function(data)
 			}
 
 			item.productionStarted = true;
-			if (item.unitTemplate)
-				Engine.PostMessage(this.entity, MT_TrainingStarted, {"entity": this.entity});
 		}
 
 		// If we won't finish the batch now, just update its timer
@@ -717,7 +706,7 @@ ProductionQueue.prototype.ProgressTimeout = function(data)
 				if (!this.spawnNotified)
 				{
 					var cmpPlayer = QueryOwnerInterface(this.entity, IID_Player);
-					var notification = {"players": [cmpPlayer.GetPlayerID()], "message": "Can't find free space to spawn trained units" };
+					var notification = {"player": cmpPlayer.GetPlayerID(), "message": "Can't find free space to spawn trained units" };
 					var cmpGUIInterface = Engine.QueryInterface(SYSTEM_ENTITY, IID_GuiInterface);
 					cmpGUIInterface.PushNotification(notification);
 					this.spawnNotified = true;

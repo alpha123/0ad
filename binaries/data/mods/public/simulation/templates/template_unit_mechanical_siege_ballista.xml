@@ -2,35 +2,35 @@
 <Entity parent="template_unit_mechanical_siege">
   <Armour>
     <Hack>2</Hack>
-    <Pierce>30</Pierce>
-    <Crush>1</Crush>
+    <Pierce>10</Pierce>
+    <Crush>5</Crush>
   </Armour>
   <Attack>
     <Ranged>
       <Hack>0.0</Hack>
-      <Pierce>100.0</Pierce>
-      <Crush>20.0</Crush>
-      <MaxRange>80</MaxRange>
+      <Pierce>25.0</Pierce>
+      <Crush>18.0</Crush>
+      <MaxRange>62</MaxRange>
       <MinRange>8.0</MinRange>
-      <Spread>2.0</Spread>
-      <ProjectileSpeed>300.0</ProjectileSpeed>
-      <PrepareTime>3000</PrepareTime>
-      <RepeatTime>3000</RepeatTime>
+      <Spread>0</Spread>
+      <ProjectileSpeed>60.0</ProjectileSpeed>
+      <PrepareTime>5000</PrepareTime>
+      <RepeatTime>4000</RepeatTime>
       <Splash>
         <Shape>Linear</Shape>
         <Range>8</Range>
         <FriendlyFire>false</FriendlyFire>
         <Hack>0.0</Hack>
         <Pierce>30.0</Pierce>
-        <Crush>20.0</Crush>
+        <Crush>18.0</Crush>
       </Splash>
     </Ranged>
   </Attack>
   <Cost>
     <BuildTime>18</BuildTime>
     <Resources>
-      <wood>250</wood>
-      <metal>250</metal>
+      <wood>100</wood>
+      <metal>100</metal>
     </Resources>
     <Population>2</Population>
   </Cost>
@@ -39,7 +39,7 @@
     <Height>2.0</Height>
   </Footprint>
   <Health>
-    <Max>200</Max>
+    <Max>120</Max>
   </Health>
   <Identity>
     <GenericName>Bolt Shooter</GenericName>
@@ -70,6 +70,6 @@ Countered by: Melee Cavalry.</Tooltip>
     </Run>
   </UnitMotion>
   <Vision>
-    <Range>120</Range>
+    <Range>70</Range>
   </Vision>
 </Entity>

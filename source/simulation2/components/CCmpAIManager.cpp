@@ -254,12 +254,7 @@ public:
 
 		// Load and execute *.js
 		VfsPaths pathnames;
-		if (vfs::GetPathnames(g_VFS, L"simulation/ai/" + moduleName + L"/", L"*.js", pathnames) < 0)
-		{
-			LOGERROR(L"Failed to load AI scripts for module %ls", moduleName.c_str());
-			return false;
-		}
-
+		vfs::GetPathnames(g_VFS, L"simulation/ai/" + moduleName + L"/", L"*.js", pathnames);
 		for (VfsPaths::iterator it = pathnames.begin(); it != pathnames.end(); ++it)
 		{
 			if (!m_ScriptInterface->LoadGlobalScriptFile(*it))

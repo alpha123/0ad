@@ -116,8 +116,6 @@
 		textcolor="white"
 		text_align="left"
 		text_valign="top"
-		scrollbar="true"
-		scrollbar_style="ModernScrollBar"
 	/>
 	<style name="ModernInput"
 		sprite="ModernDarkBoxWhite"

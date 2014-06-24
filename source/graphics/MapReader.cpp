@@ -131,15 +131,9 @@ void CMapReader::LoadMap(const VfsPath& pathname,  const CScriptValRooted& setti
 		RegMemFun(this, &CMapReader::UnpackMap, L"CMapReader::UnpackMap", 1200);
 
 	// read the corresponding XML file
-	RegMemFun(this, &CMapReader::ReadXML, L"CMapReader::ReadXML", 50);
+	RegMemFun(this, &CMapReader::ReadXML, L"CMapReader::ReadXML", 5800);
 
-	// apply terrain data to the world
-	RegMemFun(this, &CMapReader::ApplyTerrainData, L"CMapReader::ApplyTerrainData", 5);
-
-	// read entities
-	RegMemFun(this, &CMapReader::ReadXMLEntities, L"CMapReader::ReadXMLEntities", 5800);
-
-	// apply misc data to the world
+	// apply data to the world
 	RegMemFun(this, &CMapReader::ApplyData, L"CMapReader::ApplyData", 5);
 
 	// load map settings script (must be done after reading map)
@@ -195,13 +189,10 @@ void CMapReader::LoadRandomMap(const CStrW& scriptFile, const CScriptValRooted& 
 	// parse RMS results into camera settings
 	RegMemFun(this, &CMapReader::ParseCamera, L"CMapReader::ParseCamera", 5);
 
-	// apply terrain data to the world
-	RegMemFun(this, &CMapReader::ApplyTerrainData, L"CMapReader::ApplyTerrainData", 5);
-
 	// parse RMS results into entities
 	RegMemFun(this, &CMapReader::ParseEntities, L"CMapReader::ParseEntities", 1000);
 
-	// apply misc data to the world
+	// apply data to the world
 	RegMemFun(this, &CMapReader::ApplyData, L"CMapReader::ApplyData", 5);
 
 	// load map settings script (must be done after reading map)
@@ -273,7 +264,8 @@ int CMapReader::UnpackTerrain()
 	return 0;
 }
 
-int CMapReader::ApplyTerrainData()
+// ApplyData: take all the input data, and rebuild the scene from it
+int CMapReader::ApplyData()
 {
 	if (m_PatchesPerSide == 0)
 	{
@@ -304,16 +296,6 @@ int CMapReader::ApplyTerrainData()
 		}
 	}
 
-	CmpPtr<ICmpTerrain> cmpTerrain(*pSimContext, SYSTEM_ENTITY);
-	if (cmpTerrain)
-		cmpTerrain->ReloadTerrain();
-
-	return 0;
-}
-
-// ApplyData: take all the input data, and rebuild the scene from it
-int CMapReader::ApplyData()
-{
 	// copy over the lighting parameters
 	if (pLightEnv)
 		*pLightEnv = m_LightEnv;
@@ -344,6 +326,10 @@ int CMapReader::ApplyData()
 			}
 		}
 	}
+
+	CmpPtr<ICmpTerrain> cmpTerrain(*pSimContext, SYSTEM_ENTITY);
+	if (cmpTerrain)
+		cmpTerrain->ReloadTerrain();
 
 	return 0;
 }
@@ -412,11 +398,8 @@ public:
 
 	CStr ReadScriptSettings();
 
-	// read everything except for entities
-	void ReadXML();
-
 	// return semantics: see Loader.cpp!LoadFunc.
-	int ProgressiveReadEntities();
+	int ProgressiveRead();
 
 private:
 	CXeromyces xmb_file;
@@ -1091,11 +1074,17 @@ int CXMLReader::ReadEntities(XMBElement parent, double end_time)
 	return 0;
 }
 
-void CXMLReader::ReadXML()
+int CXMLReader::ProgressiveRead()
 {
-	for (int i = 0; i < nodes.Count; ++i)
+	// yield after this time is reached. balances increased progress bar
+	// smoothness vs. slowing down loading.
+	const double end_time = timer_Time() + 200e-3;
+
+	int ret;
+
+	while (node_idx < nodes.Count)
 	{
-		XMBElement node = nodes.Item(i);
+		XMBElement node = nodes.Item(node_idx);
 		CStr name = xmb_file.GetElementString(node.GetNodeName());
 		if (name == "Terrain")
 		{
@@ -1111,11 +1100,16 @@ void CXMLReader::ReadXML()
 		}
 		else if (name == "ScriptSettings")
 		{
-			// Already loaded - this is to prevent an assertion
+			//Already loaded - this is to prevent an assertion
 		}
 		else if (name == "Entities")
 		{
-			// Handled by ProgressiveReadEntities instead
+			if (!m_MapReader.m_SkipEntities)
+			{
+				ret = ReadEntities(node, end_time);
+				if (ret != 0)	// error or timed out
+					return ret;
+			}
 		}
 		else if (name == "Paths")
 		{
@@ -1134,30 +1128,6 @@ void CXMLReader::ReadXML()
 		{
 			debug_printf(L"Invalid XML element in map file: %hs\n", name.c_str());
 			debug_warn(L"Invalid map XML data");
-		}
-	}
-}
-
-int CXMLReader::ProgressiveReadEntities()
-{
-	// yield after this time is reached. balances increased progress bar
-	// smoothness vs. slowing down loading.
-	const double end_time = timer_Time() + 200e-3;
-
-	int ret;
-
-	while (node_idx < nodes.Count)
-	{
-		XMBElement node = nodes.Item(node_idx);
-		CStr name = xmb_file.GetElementString(node.GetNodeName());
-		if (name == "Entities")
-		{
-			if (!m_MapReader.m_SkipEntities)
-			{
-				ret = ReadEntities(node, end_time);
-				if (ret != 0)	// error or timed out
-					return ret;
-			}
 		}
 
 		node_idx++;
@@ -1200,23 +1170,13 @@ int CMapReader::LoadMapSettings()
 	return 0;
 }
 
+// progressive
 int CMapReader::ReadXML()
 {
 	if (!xml_reader)
 		xml_reader = new CXMLReader(filename_xml, *this);
 
-	xml_reader->ReadXML();
-
-	return 0;
-}
-
-// progressive
-int CMapReader::ReadXMLEntities()
-{
-	if (!xml_reader)
-		xml_reader = new CXMLReader(filename_xml, *this);
-
-	int ret = xml_reader->ProgressiveReadEntities();
+	int ret = xml_reader->ProgressiveRead();
 	// finished or failed
 	if (ret <= 0)
 	{

@@ -116,6 +116,7 @@ public:
 	{
 		componentManager.SubscribeToMessageType(MT_Update_MotionFormation);
 		componentManager.SubscribeToMessageType(MT_Update_MotionUnit);
+		componentManager.SubscribeToMessageType(MT_RenderSubmit); // for debug overlays
 		componentManager.SubscribeToMessageType(MT_PathResult);
 		componentManager.SubscribeToMessageType(MT_ValueModification);
 	}
@@ -402,7 +403,6 @@ public:
 		}
 		case MT_RenderSubmit:
 		{
-			PROFILE3("UnitMotion::RenderSubmit");
 			const CMessageRenderSubmit& msgData = static_cast<const CMessageRenderSubmit&> (msg);
 			RenderSubmit(msgData.collector);
 			break;
@@ -434,12 +434,6 @@ public:
 			m_RunSpeed = newRunSpeed;
 		}
 		}
-	}
-
-	void UpdateMessageSubscriptions()
-	{
-		bool needRender = m_DebugOverlayEnabled;
-		GetSimContext().GetComponentManager().DynamicSubscriptionNonsync(MT_RenderSubmit, this, needRender);
 	}
 
 	virtual bool IsMoving()
@@ -493,7 +487,6 @@ public:
 	virtual void SetDebugOverlay(bool enabled)
 	{
 		m_DebugOverlayEnabled = enabled;
-		UpdateMessageSubscriptions();
 	}
 
 	virtual bool MoveToPointRange(entity_pos_t x, entity_pos_t z, entity_pos_t minRange, entity_pos_t maxRange);

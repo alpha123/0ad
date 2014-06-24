@@ -31,7 +31,7 @@
     <Max>130</Max>
   </Health>
   <Identity>
-    <VisibleClasses datatype="tokens">Infantry</VisibleClasses>
+    <Classes datatype="tokens">Infantry</Classes>
     <GenericName>Champion Infantry</GenericName>
   </Identity>
   <Selectable>

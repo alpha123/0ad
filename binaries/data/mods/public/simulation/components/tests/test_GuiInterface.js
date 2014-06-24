@@ -1,6 +1,5 @@
 Engine.LoadComponentScript("interfaces/Attack.js");
 Engine.LoadComponentScript("interfaces/AlertRaiser.js");
-Engine.LoadComponentScript("interfaces/Auras.js");
 Engine.LoadComponentScript("interfaces/Barter.js");
 Engine.LoadComponentScript("interfaces/Builder.js");
 Engine.LoadComponentScript("interfaces/DamageReceiver.js");
@@ -358,14 +357,12 @@ AddMock(10, IID_Health, {
 
 AddMock(10, IID_Identity, {
 	GetClassesList: function() { return ["class1", "class2"]; },
-	GetVisibleClassesList: function() { return ["class3", "class4"]; },
 	GetRank: function() { return "foo"; },
 	GetSelectionGroupName: function() { return "Selection Group Name"; },
 	HasClass: function() { return true; },
 });
 
 AddMock(10, IID_Position, {
-	GetTurretParent: function() {return INVALID_ENTITY;},
 	GetPosition: function() {
 		return {x:1, y:2, z:3};
 	},
@@ -388,7 +385,6 @@ TS_ASSERT_UNEVAL_EQUALS(cmp.GetEntityState(-1, 10), {
 	identity: {
 		rank: "foo",
 		classes: ["class1", "class2"],
-		visibleClasses: ["class3", "class4"],
 		selectionGroupName: "Selection Group Name",
 	},
 	foundation: null,
@@ -419,7 +415,6 @@ TS_ASSERT_UNEVAL_EQUALS(cmp.GetExtendedEntityState(-1, 10), {
 	buildingAI: null,
 	healer: null,
 	obstruction: null,
-	turretParent: null,
 	promotion: null,
 	resourceCarrying: null,
 	resourceDropsite: null,

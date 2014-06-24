@@ -68,7 +68,6 @@ public:
 		componentManager.SubscribeGloballyToMessageType(MT_PositionChanged);
 		componentManager.SubscribeGloballyToMessageType(MT_ValueModification);
 		componentManager.SubscribeToMessageType(MT_TerrainChanged);
-		componentManager.SubscribeToMessageType(MT_WaterChanged);
 		componentManager.SubscribeToMessageType(MT_Update);
 		componentManager.SubscribeToMessageType(MT_Interpolate);
 		componentManager.SubscribeToMessageType(MT_RenderSubmit);
@@ -174,7 +173,6 @@ public:
 			break;
 		}
 		case MT_TerrainChanged:
-		case MT_WaterChanged:
 		{
 			MakeDirty();
 			break;

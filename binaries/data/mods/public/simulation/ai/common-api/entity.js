@@ -51,10 +51,9 @@ m.Template = m.Class({
 	},
 
 	classes: function() {
-		var template = this.get("Identity");
-		if (!template)
+		if (!this.get("Identity") || !this.get("Identity/Classes") || !this.get("Identity/Classes/_string"))
 			return undefined;
-		return GetIdentityClasses(template);
+		return this.get("Identity/Classes/_string").split(/\s+/);
 	},
 	
 	requiredTech: function() {
@@ -380,9 +379,9 @@ m.Template = m.Class({
 
 
 	garrisonableClasses: function() {
-		if (!this.get("GarrisonHolder"))
+		if (!this.get("GarrisonHolder") || !this.get("GarrisonHolder/List/_string"))
 			return undefined;
-		return this.get("GarrisonHolder/List/_string");
+		return this.get("GarrisonHolder/List/_string").split(/\s+/);
 	},
 
 	garrisonMax: function() {
@@ -586,10 +585,8 @@ m.Entity = m.Class({
 		var queue = this._entity.trainingQueue;
 		if (!queue)
 			return undefined;
-		var time = 0;
-		for (var item of queue)
-			time += item.timeRemaining;
-		return time/1000;
+		// TODO: compute total time for units in training queue
+		return queue.length;
 	},
 
 	foundationProgress: function() {
@@ -706,12 +703,6 @@ m.Entity = m.Class({
 		Engine.PostCommand(PlayerID,{"type": "walk", "entities": [this.id()], "x": x, "z": z, "queued": queued });
 		return this;
 	},
-
-	moveToRange: function(x, z, min, max, queued) {
-		queued = queued || false;
-		Engine.PostCommand(PlayerID,{"type": "walk-to-range", "entities": [this.id()], "x": x, "z": z, "min": min, "max": max, "queued": queued });
-		return this;
-	},
 	
 	attackMove: function(x, z, queued) {
 		queued = queued || false;
@@ -744,9 +735,8 @@ m.Entity = m.Class({
 		return this;
 	},
 
-	garrison: function(target, queued) {
-		queued = queued || false;
-		Engine.PostCommand(PlayerID,{"type": "garrison", "entities": [this.id()], "target": target.id(),"queued": queued});
+	garrison: function(target) {
+		Engine.PostCommand(PlayerID,{"type": "garrison", "entities": [this.id()], "target": target.id(),"queued": false});
 		return this;
 	},
 
@@ -818,17 +808,6 @@ m.Entity = m.Class({
 		return this;
 	},
 	
-	setRallyPoint: function(target, command) {
-		var data = {"command": command, "target": target.id()};
-		Engine.PostCommand(PlayerID, {"type": "set-rallypoint", "entities": [this.id()], "x": target.position()[0], "z": target.position()[1], "data": data});
-		return this;
-	},
-
-	unsetRallyPoint: function() {
-		Engine.PostCommand(PlayerID, {"type": "unset-rallypoint", "entities": [this.id()]});
-		return this;
-	},
-
 	train: function(type, count, metadata)
 	{
 		var trainable = this.trainableEntities();

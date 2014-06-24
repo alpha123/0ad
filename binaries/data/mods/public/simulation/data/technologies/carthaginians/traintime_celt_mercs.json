@@ -3,7 +3,7 @@
 	"genericName": "Celtic Alliance",
 	"description": "Celtic mercenaries have their train time decreased.",
 	"cost": {"food": 0, "wood": 100, "stone": 0, "metal": 100},
-	"requirements": {"all": [{"tech": "phase_town"}, {"civ": "cart"}]},
+	"requirements": {"tech": "phase_town"},
 	"requirementsTooltip": "Unlocked in Town Phase.",
 	"icon": "clenched_fist.png",
 	"researchTime": 40,

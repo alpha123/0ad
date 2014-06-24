@@ -175,9 +175,6 @@ function switchSetupPage(oldpage, newpage)
 
 function startHost(playername, servername)
 {
-	// Save player name
-	Engine.ConfigDB_CreateValue("user", "playername", playername);
-	Engine.ConfigDB_WriteFile("user", "config/user.cfg");
 	// Disallow identically named games in the multiplayer lobby
 	if (Engine.HasXmppClient())
 	{
@@ -216,11 +213,6 @@ function startHost(playername, servername)
 
 function startJoin(playername, ip)
 {
-	// Save player name and host address
-	Engine.ConfigDB_CreateValue("user", "playername", playername);
-	Engine.ConfigDB_CreateValue("user", "multiplayerserver", ip);
-	Engine.ConfigDB_WriteFile("user", "config/user.cfg");
-
 	try
 	{
 		if (g_userRating)

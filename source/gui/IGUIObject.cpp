@@ -22,6 +22,8 @@ IGUIObject
 #include "precompiled.h"
 #include "GUI.h"
 
+#include "ps/Parser.h"
+
 #include "gui/scripting/JSInterface_IGUIObject.h"
 #include "gui/scripting/JSInterface_GUITypes.h"
 #include "scriptinterface/ScriptInterface.h"

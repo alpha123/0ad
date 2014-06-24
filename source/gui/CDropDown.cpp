@@ -231,11 +231,8 @@ void CDropDown::HandleMessage(SGUIMessage &Message)
 
 	case GUIM_MOUSE_WHEEL_DOWN:
 	{
-		bool enabled;
-		GUI<bool>::GetSetting(this, "enabled", enabled);
-
 		// Don't switch elements by scrolling when open, causes a confusing interaction between this and the scrollbar.
-		if (m_Open || !enabled)
+		if (m_Open)
 			break;
 
 		GUI<int>::GetSetting(this, "selected", m_ElementHighlight);
@@ -249,11 +246,8 @@ void CDropDown::HandleMessage(SGUIMessage &Message)
 
 	case GUIM_MOUSE_WHEEL_UP:
 	{
-		bool enabled;
-		GUI<bool>::GetSetting(this, "enabled", enabled);
-
 		// Don't switch elements by scrolling when open, causes a confusing interaction between this and the scrollbar.
-		if (m_Open || !enabled)
+		if (m_Open)
 			break;
 
 		GUI<int>::GetSetting(this, "selected", m_ElementHighlight);

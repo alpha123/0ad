@@ -2,17 +2,17 @@
 <Entity parent="units/rome_cavalry_javelinist_a">
   <Armour>
     <Hack>3</Hack>
-    <Pierce>3</Pierce>
-    <Crush>4</Crush>
+    <Pierce>5</Pierce>
+    <Crush>3</Crush>
   </Armour>
   <Attack>
     <Ranged>
-      <MaxRange>48</MaxRange>
-      <Spread>1.0</Spread>
+      <MaxRange>52</MaxRange>
+      <Spread>0</Spread>
     </Ranged>
   </Attack>
   <Health>
-    <Max>160</Max>
+    <Max>170</Max>
   </Health>
   <Identity>
     <Rank>Elite</Rank>

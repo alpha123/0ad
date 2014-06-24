@@ -1,22 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Entity parent="units/brit_infantry_spearman_a">
   <Armour>
-    <Hack>4</Hack>
-    <Pierce>6</Pierce>
+    <Hack>5</Hack>
+    <Pierce>4</Pierce>
     <Crush>5</Crush>
   </Armour>
   <Attack>
     <Melee>
-      <Hack>8.0</Hack>
-      <Pierce>16.0</Pierce>
+      <Hack>14.0</Hack>
     </Melee>
     <Charge>
-      <Hack>16.0</Hack>
-      <Pierce>32.0</Pierce>
+      <Hack>28.0</Hack>
     </Charge>
   </Attack>
   <Health>
-    <Max>140</Max>
+    <Max>120</Max>
   </Health>
   <Identity>
     <Rank>Elite</Rank>

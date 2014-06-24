@@ -607,7 +607,7 @@ void CConsole::ProcessBuffer(const wchar_t* szLine)
 	CScriptVal rval;
 	g_GUI->GetActiveGUI()->GetScriptInterface()->Eval(szLine, rval);
 	if (!rval.undefined())
-		InsertMessageRaw(g_GUI->GetActiveGUI()->GetScriptInterface()->ToString(rval.get()));
+		InsertMessage(L"%ls", g_GUI->GetActiveGUI()->GetScriptInterface()->ToString(rval.get()).c_str());
 }
 
 void CConsole::LoadHistory()

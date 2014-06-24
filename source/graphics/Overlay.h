@@ -154,15 +154,6 @@ struct SOverlayQuad
 	CColor m_Color;
 };
 
-struct SOverlaySphere
-{
-	SOverlaySphere() : m_Radius(0) { }
-
-	CVector3D m_Center;
-	float m_Radius;
-	CColor m_Color;
-};
-
 // TODO: OverlayText
 
 #endif // INCLUDED_GRAPHICS_OVERLAY

@@ -3,12 +3,12 @@
   <Attack>
     <Ranged>
       <Hack>0.0</Hack>
-      <Pierce>20.0</Pierce>
+      <Pierce>25.0</Pierce>
       <Crush>0.0</Crush>
-      <MaxRange>40</MaxRange>
+      <MaxRange>44</MaxRange>
       <ProjectileSpeed>50.0</ProjectileSpeed>
-      <PrepareTime>1000</PrepareTime>
-      <RepeatTime>1000</RepeatTime>
+      <PrepareTime>1200</PrepareTime>
+      <RepeatTime>2000</RepeatTime>
     </Ranged>
   </Attack>
   <Cost>
@@ -18,13 +18,14 @@
     </Resources>
   </Cost>
   <Health>
-    <Max>140</Max>
+    <Max>150</Max>
   </Health>
   <Identity>
-    <VisibleClasses datatype="tokens">Javelin</VisibleClasses>
+    <Classes datatype="tokens">Javelin</Classes>
     <GenericName>Cavalry Skirmisher</GenericName>
     <Rollover>The javelins thrown from a horse's back were probably 3 at most. The idea was to quickly advance with 3 in hand, then throw them all. After you had done that it was time to switch to your secondary weapon which was usually a spear or a sword. However, in the game - these units will only have ranged attack.</Rollover>
-    <Tooltip>Counters: 2x vs. Archers, 1.5x vs. Cavalry Swordsmen.
+    <Tooltip>Classes: Citizen Ranged Cavalry Skirmisher.
+Counters: 2x vs. Archers, 1.5x vs. Cavalry Swordsmen.
 Countered by: Spearmen, Elephants.</Tooltip>
   </Identity>
   <Loot>

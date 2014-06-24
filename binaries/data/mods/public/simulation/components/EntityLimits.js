@@ -100,7 +100,7 @@ EntityLimits.prototype.AllowedToCreate = function(limitType, category, count)
 	{
 		var cmpPlayer = Engine.QueryInterface(this.entity, IID_Player);
 		var notification = {
-			"players": [cmpPlayer.GetPlayerID()],
+			"player": cmpPlayer.GetPlayerID(),
 			"translateMessage": true,
 			"translateParameters": ["category"],
 			"parameters": {"category": category, "limit": this.limit[category]},

@@ -20,8 +20,7 @@
   <Identity>
     <GenericName>Farmstead</GenericName>
     <Tooltip>Dropsite for the food resource. Research food gathering improvements.</Tooltip>
-    <Classes datatype="tokens">-ConquestCritical DropsiteFood</Classes>
-    <VisibleClasses datatype="tokens">Village Farmstead</VisibleClasses>
+    <Classes datatype="tokens">Village -ConquestCritical DropsiteFood Farmstead</Classes>
     <Icon>structures/farmstead.png</Icon>
   </Identity>
   <Loot>
@@ -38,9 +37,7 @@
     <BatchTimeModifier>0.7</BatchTimeModifier>
     <Technologies datatype="tokens">
       gather_wicker_baskets
-	    gather_farming_plows
-      gather_farming_training
-      gather_farming_fertilizer
+	  gather_farming_plows
     </Technologies>
   </ProductionQueue>
   <RallyPoint disable=""/>

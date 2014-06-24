@@ -35,7 +35,7 @@
   </Health>
   <Identity>
     <GenericName>Champion Cavalry</GenericName>
-    <VisibleClasses datatype="tokens">Cavalry</VisibleClasses>
+    <Classes datatype="tokens">Cavalry</Classes>
     <Formations datatype="tokens">
       formations/wedge
     </Formations>

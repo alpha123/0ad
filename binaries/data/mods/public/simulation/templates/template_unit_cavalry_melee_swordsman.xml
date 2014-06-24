@@ -2,7 +2,7 @@
 <Entity parent="template_unit_cavalry_melee">
   <Attack>
     <Melee>
-      <Hack>15.0</Hack>
+      <Hack>10.0</Hack>
       <Pierce>0.0</Pierce>
       <Crush>0.0</Crush>
       <MaxRange>6.0</MaxRange>
@@ -15,22 +15,17 @@
       <MinRange>0.0</MinRange>
     </Charge>
   </Attack>
-  <Armour>
-    <Hack>3</Hack>
-    <Pierce>1</Pierce>
-    <Crush>2</Crush>
-  </Armour>
   <Cost>
     <Resources>
-      <wood>35</wood>
-      <metal>20</metal>
+      <metal>60</metal>
     </Resources>
   </Cost>
   <Identity>
-    <VisibleClasses datatype="tokens">Sword</VisibleClasses>
+    <Classes datatype="tokens">Sword</Classes>
     <GenericName>Cavalry Swordsman</GenericName>
     <History>Fighting from horseback with a sword is a tricky thing to do. This required usage of a sword that was longer than the typical infantry sword. One needed a good reach to attack from the height of a horse. If you were without spear (the ideal weapon of choice) it was probably because you needed your hands free to do other tasks such as riding hard and fast. It wasn't uncommon for the men to dismount and attack from foot if they were armed with only a sword.</History>
-    <Tooltip>Counters: 2x vs. Archers, All Support Units, and Siege Weapons.
+    <Tooltip>Classes: Citizen Melee Cavalry Swordsman.
+Counters: 2x vs. Archers, All Support Units, and Siege Weapons.
 Countered by: Spearmen, Cavalry Skirmishers, and Elephants.</Tooltip>
   </Identity>
   <Loot>

@@ -24,7 +24,6 @@ struct SOverlayLine;
 struct SOverlayTexturedLine;
 struct SOverlaySprite;
 struct SOverlayQuad;
-struct SOverlaySphere;
 class CCamera;
 
 struct OverlayRendererInternals;
@@ -74,13 +73,6 @@ public:
 	 *                until the end of the frame.
 	 */
 	void Submit(SOverlayQuad* overlay);
-
-	/**
-	 * Add a sphere overlay for rendering in this frame.
-	 * @param overlay Must be non-null. The pointed-to object must remain valid at least
-	 *                until the end of the frame.
-	 */
-	void Submit(SOverlaySphere* overlay);
 
 	/**
 	 * Prepare internal data structures for rendering.
@@ -139,11 +131,6 @@ private:
 	 * Helper method; batch-renders all registered quad overlays, batched by their texture for effiency.
 	 */
 	void RenderQuadOverlays();
-
-	/**
-	 * Helper method; batch-renders all sphere quad overlays.
-	 */
-	 void RenderSphereOverlays();
 
 private:
 	OverlayRendererInternals* m;

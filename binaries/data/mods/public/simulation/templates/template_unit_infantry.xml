@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Entity parent="template_unit">
-  <Armour>
-    <Hack>2</Hack>
-    <Pierce>4</Pierce>
-    <Crush>3</Crush>
-  </Armour>
   <Attack>
     <Slaughter>
       <Hack>50.0</Hack>
@@ -36,7 +31,7 @@
     </Entities>
   </Builder>
   <Cost>
-    <BuildTime>10</BuildTime>
+    <BuildTime>12</BuildTime>
     <Resources>
       <food>50</food>
       <wood>0</wood>
@@ -53,8 +48,7 @@
   </Health>
   <Identity>
     <GenericName>Infantry</GenericName>
-    <Classes datatype="tokens">CitizenSoldier Worker Organic</Classes>
-    <VisibleClasses datatype="tokens">Infantry Citizen Soldier</VisibleClasses>
+    <Classes datatype="tokens">Infantry CitizenSoldier Worker Organic</Classes>
     <Rank>Basic</Rank>
   </Identity>
   <Loot>
@@ -122,6 +116,6 @@
     <CostClass>infantry</CostClass>
   </UnitMotion>
   <Vision>
-    <Range>80</Range>
+    <Range>50</Range>
   </Vision>
 </Entity>

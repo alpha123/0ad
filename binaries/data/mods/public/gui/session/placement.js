@@ -38,5 +38,3 @@ PlacementSupport.prototype.RandomizeActorSeed = function()
 {
 	this.actorSeed = Math.floor(65535 * Math.random());
 };
-
-var placementSupport = new PlacementSupport();

@@ -10,15 +10,16 @@
       <Hack>30.0</Hack>
       <Pierce>0.0</Pierce>
       <Crush>0.0</Crush>
-      <MaxRange>5.0</MaxRange>
-      <RepeatTime>1000</RepeatTime>
     </Melee>
+    <Charge>
+      <Hack>60.0</Hack>
+      <Pierce>0.0</Pierce>
+    </Charge>
   </Attack>
   <Identity>
-    <VisibleClasses datatype="tokens">Melee Spear</VisibleClasses>
+    <Classes datatype="tokens">Melee Spear</Classes>
     <GenericName>Hero Spearman</GenericName>
-    <Tooltip>Counters: 2x vs. All Cavalry.
-Countered by: Skirmishers, Swordsmen, and Cavalry Archers.</Tooltip>
+    <RequiredTechnology>phase_city</RequiredTechnology>
     <Formations datatype="tokens">
       formations/phalanx
       formations/testudo
@@ -28,6 +29,9 @@ Countered by: Skirmishers, Swordsmen, and Cavalry Archers.</Tooltip>
     <wood>10</wood>
     <metal>10</metal>
   </Loot>
+  <Minimap>
+    <Type>hero</Type>
+  </Minimap>
   <UnitMotion>
     <WalkSpeed>7.5</WalkSpeed>
     <Run>

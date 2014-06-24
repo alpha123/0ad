@@ -2,16 +2,15 @@
 <Entity parent="template_unit_infantry_melee_swordsman">
   <Attack>
     <Melee>
-      <Hack>16.0</Hack>
+      <Hack>14.0</Hack>
     </Melee>
     <Charge>
-      <Hack>32.0</Hack>
+      <Hack>28.0</Hack>
     </Charge>
   </Attack>
   <Builder>
     <Entities datatype="tokens">
 	  structures/spart_syssiton
-      structures/spart_theatron
       -structures/{civ}_wallset_stone
     </Entities>
   </Builder>
@@ -22,7 +21,7 @@
     </Resources>
   </Cost>
   <Health>
-    <Max>140</Max>
+    <Max>120</Max>
   </Health>
   <Identity>
     <Civ>spart</Civ>

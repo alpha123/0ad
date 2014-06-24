@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Entity parent="template_unit_cavalry">
+  <Armour>
+    <Hack>1</Hack>
+    <Pierce>3</Pierce>
+    <Crush>1</Crush>
+  </Armour>
   <Attack>
     <Ranged>
       <Hack>0.0</Hack>
@@ -8,15 +13,15 @@
       <MaxRange>16.0</MaxRange>
       <MinRange>20.0</MinRange>
       <ProjectileSpeed>25.0</ProjectileSpeed>
-      <PrepareTime>1000</PrepareTime>
+      <PrepareTime>900</PrepareTime>
       <RepeatTime>1500</RepeatTime>
       <PreferredClasses datatype="tokens">Organic</PreferredClasses>
-      <Spread>1.6</Spread>
+      <Spread>0</Spread>
     </Ranged>
   </Attack>
   <Identity>
     <GenericName>Ranged Cavalry</GenericName>
-	<VisibleClasses datatype="tokens">Ranged</VisibleClasses>
+	<Classes datatype="tokens">Ranged</Classes>
     <Formations datatype="tokens">
       formations/skirmish
     </Formations>

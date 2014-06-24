@@ -21,12 +21,13 @@
     <GenericName>Storehouse</GenericName>
     <Tooltip>Dropsite for wood, stone, and metal resources. Research gathering improvements for these resources.</Tooltip>
     <Classes datatype="tokens">
+	  Storehouse
+	  Village
 	  DropsiteWood
 	  DropsiteMetal
 	  DropsiteStone
 	  -ConquestCritical
 	</Classes>
-    <VisibleClasses datatype="tokens">Village Storehouse</VisibleClasses>
     <Icon>structures/storehouse.png</Icon>
   </Identity>
   <Loot>
@@ -42,15 +43,10 @@
   <ProductionQueue>
     <BatchTimeModifier>0.7</BatchTimeModifier>
     <Technologies datatype="tokens">
-      gather_lumbering_ironaxes
-      gather_lumbering_strongeraxes
-      gather_lumbering_sharpaxes
-      gather_mining_servants
-      gather_mining_serfs
-      gather_mining_slaves
-      gather_mining_wedgemallet
-      gather_mining_shaftmining
-      gather_mining_silvermining      
+      pair_gather_01
+      pair_gather_02
+      pair_gather_03
+      pair_gather_wood_01
     </Technologies>
   </ProductionQueue>
   <RallyPoint disable=""/>

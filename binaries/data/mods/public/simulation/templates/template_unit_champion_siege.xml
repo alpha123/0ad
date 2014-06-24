@@ -15,7 +15,7 @@
   </Cost>
   <Identity>
     <GenericName>Super Siege</GenericName>
-    <VisibleClasses datatype="tokens">Mechanical Siege</VisibleClasses>
+    <Classes datatype="tokens">Mechanical Siege</Classes>
   </Identity>
   <Position>
     <Anchor>pitch-roll</Anchor>

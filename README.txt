@@ -43,36 +43,5 @@ http://trac.wildfiregames.com/wiki/BuildInstructions
 Reporting problems
 ------------------
 
-Bugs should be reported on the github. See https://github.com/scythetwirler/0ad/issues.
-
---------------------------------
-Changelog - Differences from SVN
---------------------------------
-
-Units
-- Cavalry have been made weaker to pierce damage, but more resilient against hack.
-- Rams can now attack all units. In compensation, all organic units get a default of 3 Crush armor.
-- Ballistas and Onager have a much longer range and vision.
-- Ballistas deal much more damage.
-- Healers now cost only food since metal is quite rare.
-- Elephants now are significantly stronger but more expensive.
-- The basic formations have been disabled for the time being (with a surprising performance benefit).
-- Female Citizens train much faster.
-- Elite Iberian Skirmishers have been nerfed.
-- All units attack faster.
-- Singers deal both crush and pierce damage.
-- All hard bonuses have been taken out.
-- Swordsmen cost less metal, but cost a little wood.
-
-Structures
-- All structures are now weaker against crush and hack damage.
-- Civic Centers have a better garrison multiplier in an attempt to combat 2v1 rushes.
-- Walls and Wall Towers take significantly longer to build.
-- Significantly nerfed the Roman Entrenched Army Camp.
-- Farms have increased HP and more armor against hack and pierce attacks.
-
-Technologies
-- Some technologies have been made expensive (wip)
-- Some pair technologies have been unpaired.
-- Added a powerful tech to the wonder.
-- Phasing now increases health to all citizen soldiers.
+Bugs should be reported on Trac. For information on reporting problems
+and finding logs, see http://trac.wildfiregames.com/wiki/ReportingErrors

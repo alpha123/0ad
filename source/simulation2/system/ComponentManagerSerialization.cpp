@@ -21,8 +21,6 @@
 #include "IComponent.h"
 #include "ParamNode.h"
 
-#include "simulation2/MessageTypes.h"
-
 #include "simulation2/serialization/DebugSerializer.h"
 #include "simulation2/serialization/HashSerializer.h"
 #include "simulation2/serialization/StdSerializer.h"
@@ -107,7 +105,6 @@ bool CComponentManager::ComputeStateHash(std::string& outHash, bool quick)
 	CHashSerializer serializer(m_ScriptInterface);
 
 	serializer.StringASCII("rng", SerializeRNG(m_RNG), 0, 32);
-	serializer.NumberU32_Unbounded("next entity id", m_NextEntityId);
 
 	std::map<ComponentTypeId, std::map<entity_id_t, IComponent*> >::const_iterator cit = m_ComponentsByTypeId.begin();
 	for (; cit != m_ComponentsByTypeId.end(); ++cit)
@@ -154,12 +151,7 @@ bool CComponentManager::ComputeStateHash(std::string& outHash, bool quick)
  * Simulation state serialization format:
  *
  * TODO: Global version number.
- * Number of SYSTEM_ENTITY component types
- * For each SYSTEM_ENTITY component type:
- *   Component type name
- *   TODO: Component type version number.
- *   Component state.
- * Number of (non-empty, non-SYSTEM_ENTITY-only) component types.
+ * Number of (non-empty) component types.
  * For each component type:
  *   Component type name.
  *   TODO: Component type version number.
@@ -190,9 +182,7 @@ bool CComponentManager::SerializeState(std::ostream& stream)
 
 	std::map<ComponentTypeId, std::map<entity_id_t, IComponent*> >::const_iterator cit;
 	
-	uint32_t numSystemComponentTypes = 0;
 	uint32_t numComponentTypes = 0;
-	std::set<ComponentTypeId> serializedSystemComponentTypes;
 	std::set<ComponentTypeId> serializedComponentTypes;
 
 	for (cit = m_ComponentsByTypeId.begin(); cit != m_ComponentsByTypeId.end(); ++cit)
@@ -201,50 +191,19 @@ bool CComponentManager::SerializeState(std::ostream& stream)
 		bool needsSerialization = false;
 		for (std::map<entity_id_t, IComponent*>::const_iterator eit = cit->second.begin(); eit != cit->second.end(); ++eit)
 		{
-			// Don't serialize local entities, and handle SYSTEM_ENTITY separately
-			if (ENTITY_IS_LOCAL(eit->first) || eit->first == SYSTEM_ENTITY)
+			// Don't serialize local entities
+			if (ENTITY_IS_LOCAL(eit->first))
 				continue;
 
 			needsSerialization = true;
 			break;
 		}
 
-		if (needsSerialization)
-		{
-			numComponentTypes++;
-			serializedComponentTypes.insert(cit->first);
-		}
-
-		if (cit->second.find(SYSTEM_ENTITY) != cit->second.end())
-		{
-			numSystemComponentTypes++;
-			serializedSystemComponentTypes.insert(cit->first);
-		}
-	}
-
-	serializer.NumberU32_Unbounded("num system component types", numSystemComponentTypes);
-
-	for (cit = m_ComponentsByTypeId.begin(); cit != m_ComponentsByTypeId.end(); ++cit)
-	{
-		if (serializedSystemComponentTypes.find(cit->first) == serializedSystemComponentTypes.end())
+		if (!needsSerialization)
 			continue;
 
-		std::map<ComponentTypeId, ComponentType>::const_iterator ctit = m_ComponentTypesById.find(cit->first);
-		if (ctit == m_ComponentTypesById.end())
-		{
-			debug_warn(L"Invalid ctit"); // this should never happen
-			return false;
-		}
-
-		serializer.StringASCII("name", ctit->second.name, 0, 255);
-
-		std::map<entity_id_t, IComponent*>::const_iterator eit = cit->second.find(SYSTEM_ENTITY);
-		if (eit == cit->second.end())
-		{
-			debug_warn(L"Invalid eit"); // this should never happen
-			return false;
-		}
-		eit->second->Serialize(serializer);
+		numComponentTypes++;
+		serializedComponentTypes.insert(cit->first);
 	}
 
 	serializer.NumberU32_Unbounded("num component types", numComponentTypes);
@@ -267,8 +226,8 @@ bool CComponentManager::SerializeState(std::ostream& stream)
 		uint32_t numComponents = 0;
 		for (std::map<entity_id_t, IComponent*>::const_iterator eit = cit->second.begin(); eit != cit->second.end(); ++eit)
 		{
-			// Don't serialize local entities or SYSTEM_ENTITY
-			if (ENTITY_IS_LOCAL(eit->first) || eit->first == SYSTEM_ENTITY)
+			// Don't serialize local entities
+			if (ENTITY_IS_LOCAL(eit->first))
 				continue;
 
 			numComponents++;
@@ -280,8 +239,8 @@ bool CComponentManager::SerializeState(std::ostream& stream)
 		// Serialize the components now
 		for (std::map<entity_id_t, IComponent*>::const_iterator eit = cit->second.begin(); eit != cit->second.end(); ++eit)
 		{
-			// Don't serialize local entities or SYSTEM_ENTITY
-			if (ENTITY_IS_LOCAL(eit->first) || eit->first == SYSTEM_ENTITY)
+			// Don't serialize local entities
+			if (ENTITY_IS_LOCAL(eit->first))
 				continue;
 
 			serializer.NumberU32_Unbounded("entity id", eit->first);
@@ -297,6 +256,7 @@ bool CComponentManager::DeserializeState(std::istream& stream)
 {
 	try
 	{
+
 		CStdDeserializer deserializer(m_ScriptInterface, stream);
 
 		ResetState();
@@ -308,38 +268,11 @@ bool CComponentManager::DeserializeState(std::istream& stream)
 
 		deserializer.NumberU32_Unbounded("next entity id", m_NextEntityId); // TODO: use sensible bounds
 
-		uint32_t numSystemComponentTypes;
-		deserializer.NumberU32_Unbounded("num system component types", numSystemComponentTypes);
+		uint32_t numComponentTypes;
+		deserializer.NumberU32_Unbounded("num component types", numComponentTypes);
 
 		ICmpTemplateManager* templateManager = NULL;
 		CParamNode noParam;
-
-		for (size_t i = 0; i < numSystemComponentTypes; ++i)
-		{
-			std::string ctname;
-			deserializer.StringASCII("name", ctname, 0, 255);
-
-			ComponentTypeId ctid = LookupCID(ctname);
-			if (ctid == CID__Invalid)
-			{
-				LOGERROR(L"Deserialization saw unrecognised component type '%hs'", ctname.c_str());
-				return false;
-			}
-
-			IComponent* component = ConstructComponent(m_SystemEntity, ctid);
-			if (!component)
-				return false;
-
-			component->Deserialize(noParam, deserializer);
-
-			// If this was the template manager, remember it so we can use it when
-			// deserializing any further non-system entities
-			if (ctid == CID_TemplateManager)
-				templateManager = static_cast<ICmpTemplateManager*> (component);
-		}
-
-		uint32_t numComponentTypes;
-		deserializer.NumberU32_Unbounded("num component types", numComponentTypes);
 
 		for (size_t i = 0; i < numComponentTypes; ++i)
 		{
@@ -366,7 +299,7 @@ bool CComponentManager::DeserializeState(std::istream& stream)
 
 				// Try to find the template for this entity
 				const CParamNode* entTemplate = NULL;
-				if (templateManager)
+				if (templateManager && ent != SYSTEM_ENTITY) // (system entities don't use templates)
 					entTemplate = templateManager->LoadLatestTemplate(ent);
 
 				// Deserialize, with the appropriate template for this component
@@ -374,6 +307,11 @@ bool CComponentManager::DeserializeState(std::istream& stream)
 					component->Deserialize(entTemplate->GetChild(ctname.c_str()), deserializer);
 				else
 					component->Deserialize(noParam, deserializer);
+
+				// If this was the template manager, remember it so we can use it when
+				// deserializing any further non-system entities
+				if (ent == SYSTEM_ENTITY && ctid == CID_TemplateManager)
+					templateManager = static_cast<ICmpTemplateManager*> (component);
 			}
 		}
 
@@ -382,10 +320,6 @@ bool CComponentManager::DeserializeState(std::istream& stream)
 			LOGERROR(L"Deserialization didn't reach EOF");
 			return false;
 		}
-
-		// Allow components to do some final reinitialisation after everything is loaded
-		CMessageDeserialized msg;
-		BroadcastMessage(msg);
 
 		return true;
 	}

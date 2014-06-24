@@ -87,24 +87,6 @@ m.Worker.prototype.update = function(baseManager, gameState)
 				}
 			}
 		}
-		else if (this.ent.unitAIState() === "INDIVIDUAL.RETURNRESOURCE.APPROACHING"
-			&& gameState.ai.playedTurn % 10 === 0)
-		{
-			// Check from time to time that UnitAI does not send us to an inaccessible dropsite
-			var dropsite = gameState.getEntityById(this.ent.unitAIOrderData()[0]["target"]);
-			if (dropsite && dropsite.position())
-			{
-				var access = gameState.ai.accessibility.getAccessValue(this.ent.position());
-				var goalAccess = dropsite.getMetadata(PlayerID, "access");
-				if (!goalAccess || dropsite.hasClass("Elephant"))
-				{
-					goalAccess = gameState.ai.accessibility.getAccessValue(dropsite.position());
-					dropsite.setMetadata(PlayerID, "access", goalAccess);
-				}
-				if (access !== goalAccess)
-					this.returnResources(gameState);
-			}
-		}
 	}
 	else if (subrole === "builder")
 	{	
@@ -123,17 +105,12 @@ m.Worker.prototype.update = function(baseManager, gameState)
 		}
 		else
 		{
-			var access = gameState.ai.accessibility.getAccessValue(this.ent.position());
-			var goalAccess = target.getMetadata(PlayerID, "access");
-			if (!goalAccess)
-			{
-				goalAccess = gameState.ai.accessibility.getAccessValue(target.position());
-				target.setMetadata(PlayerID, "access", goalAccess);
-			}
-			if (access === goalAccess)
+			var startIndex = gameState.ai.accessibility.getAccessValue(this.ent.position());
+			var endIndex = gameState.ai.accessibility.getAccessValue(target.position());
+			if (startIndex === endIndex)
 				this.ent.repair(target);
 			else
-				gameState.ai.HQ.navalManager.requireTransport(gameState, this.ent, access, goalAccess, target.position());
+				gameState.ai.HQ.navalManager.requireTransport(gameState, this.ent, startIndex, endIndex, target.position());
 		}
 	}
 	else if (subrole === "hunter")
@@ -167,33 +144,12 @@ m.Worker.prototype.update = function(baseManager, gameState)
 					this.ent.setMetadata(PlayerID, "lastHuntSearch", gameState.ai.playedTurn);
 			}
 		}
-		else if (gameState.ai.playedTurn % 10 === 0)  // Perform some checks from time to time
+		else if (this.ent.unitAIState().split(".")[1] === "GATHER" || this.ent.unitAIState().split(".")[1] === "RETURNRESOURCE")
 		{
-			if (this.ent.unitAIState().split(".")[1] === "GATHER"
-				|| this.ent.unitAIState().split(".")[1] === "RETURNRESOURCE")
-			{
-				// we may have drifted towards ennemy territory during the hunt, if yes go home
-				var territoryOwner = gameState.ai.HQ.territoryMap.getOwner(this.ent.position());
-				if (territoryOwner != 0 && !gameState.isPlayerAlly(territoryOwner))  // player is its own ally
-					this.startHunting(gameState);
-				else if (this.ent.unitAIState() === "INDIVIDUAL.RETURNRESOURCE.APPROACHING")
-				{
-					// Check that UnitAI does not send us to an inaccessible dropsite
-					var dropsite = gameState.getEntityById(this.ent.unitAIOrderData()[0]["target"]);
-					if (dropsite && dropsite.position())
-					{
-						var access = gameState.ai.accessibility.getAccessValue(this.ent.position());
-						var goalAccess = dropsite.getMetadata(PlayerID, "access");
-						if (!goalAccess || dropsite.hasClass("Elephant"))
-						{
-							goalAccess = gameState.ai.accessibility.getAccessValue(dropsite.position());
-							dropsite.setMetadata(PlayerID, "access", goalAccess);
-						}
-						if (access !== goalAccess)
-							this.returnResources(gameState);
-					}
-				}
-			}
+			// we may have drifted towards ennemy territory during the hunt, if yes go home
+			var territoryOwner = gameState.ai.HQ.territoryMap.getOwner(this.ent.position());
+			if (territoryOwner != 0 && !gameState.isPlayerAlly(territoryOwner))  // player is its own ally
+				this.startHunting(gameState);
 		}
 	}
 	else if (subrole === "fisher")
@@ -565,6 +521,7 @@ m.Worker.prototype.startHunting = function(gameState, position)
 			if (gameState.sharedScript.passabilityClasses["pathfinderObstruction"] & gameState.getMap().data[id])
 			{
 				supply.setMetadata(PlayerID, "inaccessible", true)
+				warn("on a trouve un poulet inaccessible");
 				return;
 			}
 		}
@@ -611,7 +568,7 @@ m.Worker.prototype.startFishing = function(gameState)
 	var resources = gameState.getFishableSupplies();
 	if (resources.length === 0)
 	{
-		gameState.ai.HQ.navalManager.resetFishingBoats(gameState);
+		gameState.ai.HQ.navalManager.resetFishingBoats();
 		this.ent.destroy();
 		return false;
 	}
@@ -785,17 +742,15 @@ m.Worker.prototype.moveAway = function(baseManager, gameState){
 	var pos = this.ent.position();
 	var dist = Math.min();
 	var destination = pos;
-	for (var gatherer of gatherers)
+	for (var i = 0; i < gatherers.length; ++i)
 	{
-		if (!gatherer.position() || gatherer.getMetadata(PlayerID, "transport") !== undefined)
+		if (gatherers[i].isIdle())
 			continue;
-		if (gatherer.isIdle())
-			continue;
-		var distance = API3.SquareVectorDistance(pos, gatherer.position());
+		var distance = API3.SquareVectorDistance(pos, gatherers[i].position());
 		if (distance > dist)
 			continue;
 		dist = distance;
-		destination = gatherer.position();
+		destination = gatherers[i].position();
 	}
 	this.ent.move(destination[0], destination[1]);
 };

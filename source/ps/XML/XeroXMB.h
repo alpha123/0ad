@@ -1,4 +1,4 @@
-/* Copyright (C) 2014 Wildfire Games.
+/* Copyright (C) 2011 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -28,6 +28,9 @@ but much more efficiency (particularly for loading simple data
 classes that don't need much initialisation).
 
 Main limitations:
+ * Only handles UTF16 internally. (It's meant to be a feature, but
+   can be detrimental if it's always being converted back to
+   ASCII.)
  * Can't correctly handle mixed text/elements inside elements -
    "<div> <b> Text </b> </div>" and "<div> Te<b/>xt </div>" are
    considered identical.
@@ -42,13 +45,12 @@ Theoretical file structure:
 
 XMB_File {
 	char Header[4]; // because everyone has one; currently "XMB0"
-	u32 Version;
 
 	int ElementNameCount;
-	ZStr8 ElementNames[];
+	ZStrA ElementNames[];
 
 	int AttributeNameCount;
-	ZStr8 AttributeNames[];
+	ZStrA AttributeNames[];
 
 	XMB_Node Root;
 }
@@ -70,20 +72,29 @@ XMB_Node {
 
 XMB_Attribute {
 	int Name;
-	ZStr8 Value;
+	ZStrW Value;
 }
 
-ZStr8 {
+ZStrA {
 	int Length; // in bytes
-	char* Text; // null-terminated UTF8
+	char* Text; // null-terminated ASCII
+}
+
+ZStrW {
+	int Length; // in bytes
+	char16* Text; // null-terminated UTF16
 }
 
 XMB_Text {
 20)	int Length; // 0 if there's no text, else 4+sizeof(Text) in bytes including terminator
 	// If Length != 0:
 24)	int LineNumber; // for e.g. debugging scripts
-28)	char* Text; // null-terminated UTF8
+28)	char16* Text; // null-terminated UTF16
 }
+
+TODO: since the API was changed to return UTF-8 CStrs,
+it'd make much more sense to store UTF-8 on disk too
+(plus it'd save space).
 
 */
 
@@ -105,7 +116,6 @@ XMB_Text {
 // File headers, to make sure it doesn't try loading anything other than an XMB
 extern const char* HeaderMagicStr;
 extern const char* UnfinishedHeaderMagicStr;
-extern const u32 XMBVersion;
 
 class XMBElement;
 class XMBElementList;
@@ -124,14 +134,13 @@ public:
 	// @return indication of success; main cause for failure is attempting to
 	// load a partially valid XMB file (e.g. if the game was interrupted
 	// while writing it), which we detect by checking the magic string.
-	// It also fails when trying to load an XMB file with a different version.
 	bool Initialise(const char* FileData);
 
 	// Returns the root element
 	XMBElement GetRoot() const;
 
 	
-	// Returns internal ID for a given element/attribute string.
+	// Returns internal ID for a given ASCII element/attribute string.
 	int GetElementID(const char* Name) const;
 	int GetAttributeID(const char* Name) const;
 
@@ -154,7 +163,7 @@ private:
 	const char* m_AttributePointer;
 #endif
 
-	std::string ReadZStr8();
+	std::string ReadZStrA();
 };
 
 class XMBElement

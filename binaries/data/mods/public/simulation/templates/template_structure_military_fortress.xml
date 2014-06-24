@@ -53,12 +53,12 @@
   <Identity>
     <GenericName>Fortress</GenericName>
     <Tooltip>Train heroes, champions, and siege weapons. Research siege weapon improvements. Garrison: 20.</Tooltip>
-    <Classes datatype="tokens">GarrisonFortress</Classes>
-    <VisibleClasses datatype="tokens">
-      Defensive
+    <Classes datatype="tokens">
       City
+      Defensive
+      GarrisonFortress
       Fortress
-    </VisibleClasses>
+    </Classes>
     <Icon>structures/fortress.png</Icon>
     <RequiredTechnology>phase_city</RequiredTechnology>
   </Identity>

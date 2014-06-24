@@ -2,29 +2,29 @@
 <Entity parent="template_unit_infantry_melee">
   <Armour>
     <Hack>3</Hack>
-    <Pierce>4</Pierce>
-    <Crush>3</Crush>
+    <Pierce>1</Pierce>
+    <Crush>1</Crush>
   </Armour>
   <Attack>
     <Melee>
-      <Hack>12.0</Hack>
+      <Hack>10.0</Hack>
       <Pierce>0.0</Pierce>
     </Melee>
     <Charge>
-      <Hack>24.0</Hack>
+      <Hack>20.0</Hack>
     </Charge>
   </Attack>
   <Cost>
     <Resources>
-      <wood>30</wood>
-      <metal>20</metal>
+      <metal>60</metal>
     </Resources>
   </Cost>
   <Identity>
-    <VisibleClasses datatype="tokens">Sword</VisibleClasses>
+    <Classes datatype="tokens">Sword</Classes>
     <GenericName>Swordsman</GenericName>
     <History>Weapon is basically a developed sickle. Probably from the club, to the axe, to the sickle to the sword. It was the Romans who used them to combat the long range of the sarissa. Their spears were so long they had to use two hands to wield them. In a formation they were almost impossible to maneuver. If flanked, they were easily cut down by a sword as demonstrated by the Romans at the battle of Cynoscephalae. Generally swordsmen were well armored, had shields, and tended to be nobles. A good sword was an expensive weapon.</History>
-    <Tooltip>Counters: 2x vs. Spearmen, 1.5x vs. Skirmishers, and 1.25x vs. Elephants.
+    <Tooltip>Classes: Citizen Melee Infantry Swordsman.
+Counters: 2x vs. Spearmen, 1.5x vs. Skirmishers, and 1.25x vs. Elephants.
 Countered by: Archers, Cavalry Spearmen, and Cavalry Archers.</Tooltip>
   </Identity>
   <Loot>

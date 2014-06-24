@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Entity parent="template_unit">
   <Armour>
-    <Hack>3</Hack>
-    <Pierce>1</Pierce>
+    <Hack>1</Hack>
+    <Pierce>5</Pierce>
     <Crush>2</Crush>
   </Armour>
   <Attack>
@@ -15,7 +15,7 @@
   </Attack>
   <Cost>
     <Population>1</Population>
-    <BuildTime>12</BuildTime>
+    <BuildTime>15</BuildTime>
     <Resources>
       <food>80</food>
     </Resources>
@@ -28,8 +28,7 @@
     <Max>150</Max>
   </Health>
   <Identity>
-    <Classes datatype="tokens">CitizenSoldier Organic</Classes>
-    <VisibleClasses datatype="tokens">Cavalry Citizen Soldier</VisibleClasses>
+    <Classes datatype="tokens">Cavalry CitizenSoldier Organic</Classes>
     <GenericName>Cavalry</GenericName>
     <Rank>Basic</Rank>
     <Formations datatype="tokens">
@@ -103,6 +102,6 @@
     </Run>
   </UnitMotion>
   <Vision>
-    <Range>96</Range>
+    <Range>60</Range>
   </Vision>
 </Entity>

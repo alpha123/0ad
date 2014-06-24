@@ -81,8 +81,7 @@ m.TransportPlan.prototype.countFreeSlots = function(onlyTrulyFree)
 		if (onlyTrulyFree)
 			slots -= ent.garrisoned().length;
 	});
-	return slots;
-};
+}
 
 m.TransportPlan.prototype.assignShip = function(gameState, ship)
 {

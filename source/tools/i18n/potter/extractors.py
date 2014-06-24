@@ -419,13 +419,7 @@ class xml(Extractor):
                                 comment = element.get("comment")
                                 comment = u" ".join(comment.split()) # Remove tabs, line breaks and unecessary spaces.
                                 comments.append(comment)
-                            if "splitOnWhitespace" in self.keywords[keyword]:
-                                for splitText in element.text.split():
-                                    # split on whitespace is used for token lists, there, a leading '-' means the token has to be removed, so it's not to be processed here either
-                                    if splitText[0] != "-":
-                                        yield splitText, context, position, comments
-                            else:
-                                yield element.text, context, position, comments
+                            yield element.text, context, position, comments
 
 
 # Hack from http://stackoverflow.com/a/2819788

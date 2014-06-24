@@ -11,12 +11,17 @@
       <Pierce>0.0</Pierce>
       <Crush>0.0</Crush>
       <MaxRange>8.0</MaxRange>
-      <RepeatTime>1000</RepeatTime>
     </Melee>
+    <Charge>
+      <Hack>20.0</Hack>
+      <Pierce>0.0</Pierce>
+      <MaxRange>8.0</MaxRange>
+    </Charge>
   </Attack>
   <Identity>
-    <VisibleClasses datatype="tokens">Melee Spear Pike</VisibleClasses>
+    <Classes datatype="tokens">Melee Spear Pike</Classes>
     <GenericName>Hero Pikeman</GenericName>
+    <RequiredTechnology>phase_city</RequiredTechnology>
     <Formations datatype="tokens">
       formations/phalanx
       formations/testudo

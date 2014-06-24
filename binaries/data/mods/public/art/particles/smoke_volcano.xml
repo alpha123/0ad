@@ -2,7 +2,7 @@
 <particles>
 
     <texture>art/textures/particles/dust_256a.png</texture>
-    <blend mode="over"/>
+    <blend mode="overlay"/>
 
     <start_full/>
 

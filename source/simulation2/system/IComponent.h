@@ -58,7 +58,6 @@ public:
 
 	virtual JSClass* GetJSClass() const;
 	virtual jsval GetJSInstance() const;
-	virtual int GetComponentTypeId() const = 0;
 
 private:
 	CEntityHandle m_EntityHandle;

@@ -54,14 +54,12 @@ public:
 	{
 	}
 
-	void Setup(uintptr_t id, size_t size)
+	FreedBlock(uintptr_t id, size_t size)
+		:  m_magic(s_magic), m_size(size), m_id(id)
 	{
-		m_magic = s_magic;
-		m_size = size;
-		m_id = id;
 	}
 
-	void Reset()
+	~FreedBlock()
 	{
 		// clear all fields to prevent accidental reuse
 		prev = next = 0;
@@ -412,9 +410,8 @@ public:
 
 	FreedBlock* WriteTags(u8* p, size_t size)
 	{
-		FreedBlock* freedBlock = (FreedBlock*)p;
-		freedBlock->Setup(s_headerId, size);
-		Footer(freedBlock)->Setup(s_footerId, size);
+		FreedBlock* freedBlock = new(p) FreedBlock(s_headerId, size);
+		(void)new(Footer(freedBlock)) FreedBlock(s_footerId, size);
 
 		m_freeBlocks++;
 		m_freeBytes += size;
@@ -433,8 +430,8 @@ public:
 		m_freeBytes -= freedBlock->Size();
 
 		FreedBlock* footer = Footer(freedBlock);
-		freedBlock->Reset();
-		footer->Reset();
+		freedBlock->~FreedBlock();
+		footer->~FreedBlock();
 	}
 
 	FreedBlock* PrecedingBlock(u8* p, u8* beginningOfPool) const

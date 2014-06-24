@@ -24,9 +24,15 @@ function GetTechModifiedProperty(currentTechModifications, entityTemplateData, p
 
 	// TODO: will we ever need the full template?
 	// Get the classes which this entity template belongs to
-	var classes = [];
+	var rawClasses;
 	if (entityTemplateData && entityTemplateData.Identity)
-		classes = GetIdentityClasses(entityTemplateData.Identity);
+	{
+		rawClasses = entityTemplateData.Identity.Classes;
+		rawClasses = rawClasses && "_string" in rawClasses ?  rawClasses._string : "";
+		if (entityTemplateData.Identity.Rank)
+			rawClasses += " " + entityTemplateData.Identity.Rank;
+	} 
+	var classes = rawClasses && rawClasses.length ? rawClasses.split(/\s+/) : [];
 
 	var retValue = propertyValue;
 
@@ -57,5 +63,17 @@ function GetTechModifiedProperty(currentTechModifications, entityTemplateData, p
  */
 function DoesModificationApply(modification, classes)
 {
-	return MatchesClassList(classes, modification.affects);
+	// See if any of the lists of classes matches this entity
+	for (var j in modification.affects)
+	{
+		var hasAllClasses = true;
+		// Check each class in affects is present for the entity
+		for (var k in modification.affects[j])
+			hasAllClasses = hasAllClasses && (classes.indexOf(modification.affects[j][k]) !== -1);
+
+		if (hasAllClasses)
+			return true;
+	}
+
+	return false;
 }

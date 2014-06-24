@@ -2,7 +2,7 @@
 <Entity parent="units/hele_infantry_slinger_b">
   <Armour>
     <Hack>2</Hack>
-    <Pierce>2</Pierce>
+    <Pierce>3</Pierce>
     <Crush>4</Crush>
   </Armour>
   <Attack>

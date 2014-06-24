@@ -260,7 +260,7 @@ Formation.prototype.SetInPosition = function(ent)
 	// Rotate the entity to the right angle
 	var cmpPosition = Engine.QueryInterface(this.entity, IID_Position);
 	var cmpEntPosition = Engine.QueryInterface(ent, IID_Position);
-	if (cmpEntPosition && cmpEntPosition.IsInWorld() && cmpPosition && cmpPosition.IsInWorld())
+	if (cmpEntPosition && cmpEntPosition.IsInWorld() && cmpPosition && cmpPosition.IsInWorld)
 		cmpEntPosition.TurnTo(cmpPosition.GetRotation().y);
 
 	this.inPosition.push(ent);
@@ -525,8 +525,6 @@ Formation.prototype.MoveMembersIntoFormation = function(moveCenter, force)
 
 	var xMax = 0;
 	var yMax = 0;
-	var xMin = 0;
-	var yMin = 0;
 
 	for (var i = 0; i < this.offsets.length; ++i)
 	{
@@ -536,20 +534,27 @@ Formation.prototype.MoveMembersIntoFormation = function(moveCenter, force)
 		if (!cmpUnitAI)
 			continue;
 		
-		var data = 
+		if (force)
 		{
-			"target": this.entity,
-			"x": offset.x,
-			"z": offset.y
-		};
-		cmpUnitAI.AddOrder("FormationWalk", data, !force);
+			cmpUnitAI.ReplaceOrder("FormationWalk", {
+				"target": this.entity,
+				"x": offset.x,
+				"z": offset.y
+			});
+		}
+		else
+		{
+			cmpUnitAI.PushOrderFront("FormationWalk", {
+				"target": this.entity,
+				"x": offset.x,
+				"z": offset.y
+			});
+		}
 		xMax = Math.max(xMax, offset.x);
 		yMax = Math.max(yMax, offset.y);
-		xMin = Math.min(xMin, offset.x);
-		yMin = Math.min(yMin, offset.y);
 	}
-	this.width = xMax - xMin;
-	this.depth = yMax - yMin;
+	this.width = xMax * 2;
+	this.depth = yMax * 2;
 };
 
 Formation.prototype.MoveToMembersCenter = function()
@@ -738,7 +743,7 @@ Formation.prototype.ComputeFormationOffsets = function(active, positions)
 					x += side * centerGap / 2;
 				}
 				var column = Math.ceil(n/2) + Math.ceil(c/2) * side;
-				var r1 = 0;
+				var r1 = 0
 				var r2 = 0;
 				if (this.sloppyness != 0)
 				{

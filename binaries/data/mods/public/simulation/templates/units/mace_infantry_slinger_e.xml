@@ -2,7 +2,7 @@
 <Entity parent="units/mace_infantry_slinger_a">
   <Armour>
     <Hack>3</Hack>
-    <Pierce>3</Pierce>
+    <Pierce>4</Pierce>
     <Crush>5</Crush>
   </Armour>
   <Attack>

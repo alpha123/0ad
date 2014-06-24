@@ -27,8 +27,6 @@
 
 #include "simulation2/components/ICmpPathfinder.h"
 
-#include "maths/Vector3D.h"
-
 #define DEFAULT_MESSAGE_IMPL(name) \
 	virtual int GetType() const { return MT_##name; } \
 	virtual const char* GetScriptHandlerName() const { return "On" #name; } \
@@ -185,24 +183,6 @@ public:
 	int* progress;
 };
 
-/**
- * Broadcast after the entire simulation state has been deserialized.
- * Components should do all their self-contained work in their Deserialize
- * function when possible. But any reinitialisation that depends on other
- * components or other entities, that might not be constructed until later
- * in the deserialization process, may be done in response to this message
- * instead.
- */
-class CMessageDeserialized : public CMessage
-{
-public:
-	DEFAULT_MESSAGE_IMPL(Deserialized)
-
-	CMessageDeserialized()
-	{
-	}
-};
-
 
 /**
  * This is sent immediately after a new entity's components have all been created
@@ -257,8 +237,7 @@ public:
 };
 
 /**
- * Sent by CCmpPosition whenever anything has changed that will affect the
- * return value of GetPosition2D() or GetRotation().Y
+ * Sent during TurnStart.
  *
  * If @c inWorld is false, then the other fields are invalid and meaningless.
  * Otherwise they represent the current position.
@@ -279,33 +258,13 @@ public:
 	entity_angle_t a;
 };
 
-/**
- * Sent by CCmpPosition whenever anything has changed that will affect the
- * return value of GetInterpolatedTransform()
- */
-class CMessageInterpolatedPositionChanged : public CMessage
-{
-public:
-	DEFAULT_MESSAGE_IMPL(InterpolatedPositionChanged)
-
-	CMessageInterpolatedPositionChanged(entity_id_t entity, bool inWorld, const CVector3D& pos0, const CVector3D& pos1) :
-		entity(entity), inWorld(inWorld), pos0(pos0), pos1(pos1)
-	{
-	}
-
-	entity_id_t entity;
-	bool inWorld;
-	CVector3D pos0;
-	CVector3D pos1;
-};
-
 /*Sent whenever the territory type (neutral,own,enemy) differs from the former type*/
 class CMessageTerritoryPositionChanged : public CMessage
 {
 public:
 	DEFAULT_MESSAGE_IMPL(TerritoryPositionChanged)
 
-	CMessageTerritoryPositionChanged(entity_id_t entity, player_id_t newTerritory) :
+	CMessageTerritoryPositionChanged(entity_id_t entity, player_id_t newTerritory) : 
 		entity(entity), newTerritory(newTerritory)
 	{
 	}
@@ -333,19 +292,6 @@ public:
 };
 
 /**
- * Sent when water height has been changed.
- */
-class CMessageWaterChanged : public CMessage
-{
-public:
-	DEFAULT_MESSAGE_IMPL(WaterChanged)
-
-	CMessageWaterChanged()
-	{
-	}
-};
-
-/**
  * Sent when terrain (texture or elevation) has been changed.
  */
 class CMessageTerrainChanged : public CMessage
@@ -359,20 +305,6 @@ public:
 	}
 
 	int32_t i0, j0, i1, j1; // inclusive lower bound, exclusive upper bound, in tiles
-};
-
-/**
- * Sent when ObstructionManager's view of the shape of the world has changed
- * (changing the TILE_OUTOFBOUNDS tiles returned by Rasterise).
- */
-class CMessageObstructionMapShapeChanged : public CMessage
-{
-public:
-	DEFAULT_MESSAGE_IMPL(ObstructionMapShapeChanged)
-
-	CMessageObstructionMapShapeChanged()
-	{
-	}
 };
 
 /**

@@ -21,7 +21,7 @@ m.Army = function(gameState, owner, ownEntities, foeEntities)
 	// average
 	this.foePosition = [0,0];		
 	this.ownPosition = [0,0];
-	this.positionLastUpdate = gameState.ai.elapsedTime;
+	this.positionLastUpdate = gameState.getTimeElapsed();
 
 	// Some caching
 	// A list of our defenders that were tasked with attacking a particular unit
@@ -50,12 +50,12 @@ m.Army = function(gameState, owner, ownEntities, foeEntities)
 // if not forced, will only recalculate if on a different turn.
 m.Army.prototype.recalculatePosition = function(gameState, force)
 {
-	if (!force && this.positionLastUpdate === gameState.ai.elapsedTime)
+	if (!force && this.positionLastUpdate === gameState.getTimeElapsed())
 		return;
 	var pos = [0,0];
 	if (this.foeEntities.length !== 0)
 	{
-		for (var id of this.foeEntities)
+		for each (var id in this.foeEntities)
 		{
 			var ent = gameState.getEntityById(id);
 			var epos = ent.position();
@@ -69,7 +69,7 @@ m.Army.prototype.recalculatePosition = function(gameState, force)
 
 	this.ownPosition = [0,0];
 	var npos = 0;  // same defenders may be sailing to defend us
-	for (var id of this.ownEntities)
+	for each (var id in this.ownEntities)
 	{
 		var ent = gameState.getEntityById(id);
 		if (!ent.position())
@@ -85,7 +85,7 @@ m.Army.prototype.recalculatePosition = function(gameState, force)
 		this.ownPosition[1] = pos[1]/npos;
 	}
 
-	this.positionLastUpdate = gameState.ai.elapsedTime;
+	this.positionLastUpdate = gameState.getTimeElapsed();
 }
 
 // helper
@@ -96,9 +96,9 @@ m.Army.prototype.recalculateStrengths = function (gameState)
 	
 	// todo: deal with specifics.
 
-	for (var id of this.foeEntities)
+	for each (var id in this.foeEntities)
 		this.evaluateStrength(gameState.getEntityById(id));
-	for (var id of this.ownEntities)
+	for each (var id in this.ownEntities)
 		this.evaluateStrength(gameState.getEntityById(id), true);
 }
 
@@ -240,7 +240,7 @@ m.Army.prototype.removeOwn = function (gameState, ID, Entity)
 		{
 			if (gameState.ai.HQ.Config.debug > 0)
 				warn("ent from army still in transport plan: plan " + planID + " canceled");
-			for (var plan of gameState.ai.HQ.navalManager.transportPlans)
+			for each (var plan in gameState.ai.HQ.navalManager.transportPlans)
 			{
 				if (plan.ID !== planID)
 					continue;
@@ -263,7 +263,7 @@ m.Army.prototype.assignUnit = function (gameState, entID)
 
 // resets the army properly.
 // assumes we already cleared dead units.
-m.Army.prototype.clear = function (gameState)
+m.Army.prototype.clear = function (gameState, events)
 {
 	while(this.foeEntities.length > 0)
 		this.removeFoe(gameState,this.foeEntities[0]);
@@ -293,10 +293,10 @@ m.Army.prototype.merge = function (gameState, otherArmy)
 	for (var i in otherArmy.assignedTo)
 		this.assignedTo[i] = otherArmy.assignedTo[i];
 	
-	for (var id of otherArmy.foeEntities)
+	for each (var id in otherArmy.foeEntities)
 		this.addFoe(gameState, id);
 	// TODO: reassign those ?
-	for (var id of otherArmy.ownEntities)
+	for each (var id in otherArmy.ownEntities)
 		this.addOwn(gameState, id);
 
 	this.recalculatePosition(gameState, true);
@@ -316,7 +316,7 @@ m.Army.prototype.checkEvents = function (gameState, events)
 	// Warning the metadata is already cloned in shared.js. Futhermore, changes should be done before destroyEvents
 	// otherwise it would remove the old entity from this army list
 	// TODO we should may-be reevaluate the strength
-	for (var msg of renameEvents)
+	for each (var msg in renameEvents)
 	{
 		if (this.foeEntities.indexOf(msg.entity) !== -1)
 		{
@@ -344,7 +344,7 @@ m.Army.prototype.checkEvents = function (gameState, events)
 		}
 	}
 
-	for (var msg of destroyEvents)
+	for each (var msg in destroyEvents)
 	{
 		if (msg.entityObj === undefined)
 			continue;
@@ -354,10 +354,10 @@ m.Army.prototype.checkEvents = function (gameState, events)
 			this.removeFoe(gameState, msg.entity, msg.entityObj);
 	}
 
-	for (var msg of garriEvents)
+	for each (var msg in garriEvents)
 		this.removeFoe(gameState, msg.entity);
 
-	for (var msg of convEvents)
+	for each (var msg in convEvents)
 	{
 		if (msg.to === PlayerID)
 		{
@@ -378,10 +378,10 @@ m.Army.prototype.onUpdate = function (gameState)
 	// perhaps occasional strength recomputation
 	
 	// occasional update or breakaways, positions…
-	if (gameState.ai.elapsedTime - this.positionLastUpdate > 5)
+	if (gameState.getTimeElapsed() - this.positionLastUpdate > 5000)
 	{
 		this.recalculatePosition(gameState);
-		this.positionLastUpdate = gameState.ai.elapsedTime;
+		this.positionLastUpdate = gameState.getTimeElapsed();
 	
 		// Check for breakaways.
 		for (var i = 0; i < this.foeEntities.length; ++i)

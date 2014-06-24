@@ -40,9 +40,9 @@ m.AttackManager.prototype.init = function(gameState, queues, allowRush)
 // Others once in a while
 m.AttackManager.prototype.update = function(gameState, queues, events)
 {
-	if (this.Config.debug == 2 &&  gameState.ai.elapsedTime > this.debugTime + 60)
+	if (this.Config.debug == 2 &&  gameState.getTimeElapsed() > this.debugTime + 60000)
 	{
-		this.debugTime = gameState.ai.elapsedTime;
+		this.debugTime = gameState.getTimeElapsed();
 		warn(" upcoming attacks =================");
 		for (var attackType in this.upcomingAttacks)
 		{
@@ -69,12 +69,12 @@ m.AttackManager.prototype.update = function(gameState, queues, events)
 		for (var i = 0; i < this.upcomingAttacks[attackType].length; ++i)
 		{
 			var attack = this.upcomingAttacks[attackType][i];
-			attack.checkEvents(gameState, events);
+			attack.checkEvents(gameState, events, queues);
 
 			// okay so we'll get the support plan
 			if (!attack.isStarted())
 			{
-				var updateStep = attack.updatePreparation(gameState, events);
+				var updateStep = attack.updatePreparation(gameState, this,events);
 					
 				// now we're gonna check if the preparation time is over
 				if (updateStep === 1 || attack.isPaused() )
@@ -142,11 +142,11 @@ m.AttackManager.prototype.update = function(gameState, queues, events)
 		for (var i = 0; i < this.startedAttacks[attackType].length; ++i)
 		{
 			var attack = this.startedAttacks[attackType][i];
-			attack.checkEvents(gameState, events);
+			attack.checkEvents(gameState, events, queues);
 			// okay so then we'll update the attack.
 			if (attack.isPaused())
 				continue;
-			var remaining = attack.update(gameState, events);
+			var remaining = attack.update(gameState,this, events);
 			if (!remaining)
 			{
 				if (this.Config.debug > 0)
@@ -175,12 +175,16 @@ m.AttackManager.prototype.update = function(gameState, queues, events)
 			}
 		}
 	}
-	else if (this.upcomingAttacks["Attack"].length === 0 && this.upcomingAttacks["HugeAttack"].length === 0
-		&& (this.startedAttacks["Attack"].length + this.startedAttacks["HugeAttack"].length < Math.round(gameState.getPopulationMax()/100)))
+	// if we have a barracks, there's no water, we're at age >= 1 and we've decided to attack.
+	else if (gameState.countEntitiesByType(gameState.applyCiv("structures/{civ}_barracks"), true) >= 1
+		&& (this.startedAttacks["Attack"].length + this.startedAttacks["HugeAttack"].length < Math.round(gameState.getPopulationMax()/100))
+		&& (gameState.currentPhase() > 1 || gameState.isResearching(gameState.townPhase())))
 	{
-		if ((gameState.countEntitiesByType(gameState.applyCiv("structures/{civ}_barracks"), true) >= 1
-				&& (gameState.currentPhase() > 1 || gameState.isResearching(gameState.townPhase())))
-			|| !gameState.ai.HQ.baseManagers[1])	// if we have no base ... nothing else to do than attack
+		if (gameState.countEntitiesByType(gameState.applyCiv("structures/{civ}_dock"), true) === 0 && gameState.ai.HQ.navalMap)
+		{
+			// wait till we get a dock.
+		}
+		else if (this.upcomingAttacks["Attack"].length === 0 && this.upcomingAttacks["HugeAttack"].length === 0)
 		{
 			if (this.attackNumber < 2 || this.startedAttacks["HugeAttack"].length > 0)
 				var type = "Attack";
@@ -204,7 +208,7 @@ m.AttackManager.prototype.update = function(gameState, queues, events)
 	if (this.upcomingAttacks["Raid"].length === 0 && gameState.ai.HQ.defenseManager.targetList.length)
 	{
 		var target = undefined;
-		for (var targetId of gameState.ai.HQ.defenseManager.targetList)
+		for each (var targetId in gameState.ai.HQ.defenseManager.targetList)
 		{
 			target = gameState.getEntityById(targetId);
 			if (target)

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Entity parent="template_unit_mechanical_siege">
   <Armour>
-    <Hack>1</Hack>
-    <Pierce>40</Pierce>
-    <Crush>5</Crush>
+    <Hack>2</Hack>
+    <Pierce>30</Pierce>
+    <Crush>10</Crush>
   </Armour>
   <Attack>
     <Melee>
@@ -12,14 +12,16 @@
       <Crush>80.0</Crush>
       <MaxRange>6.5</MaxRange>
       <RepeatTime>1500</RepeatTime>
+      <RestrictedClasses datatype="tokens">Organic</RestrictedClasses>
       <PreferredClasses datatype="tokens">Gates Structure</PreferredClasses>
     </Melee>
     <Charge>
       <Hack>0.0</Hack>
       <Pierce>0.0</Pierce>
-      <Crush>160.0</Crush>
+      <Crush>100.0</Crush>
       <MaxRange>6.5</MaxRange>
       <MinRange>0.0</MinRange>
+      <RestrictedClasses datatype="tokens">Organic</RestrictedClasses>
       <PreferredClasses datatype="tokens">Gates Structure</PreferredClasses>
     </Charge>
   </Attack>
@@ -27,8 +29,8 @@
     <BuildTime>20</BuildTime>
     <Population>5</Population>
     <Resources>
-      <wood>350</wood>
-      <metal>200</metal>
+      <wood>200</wood>
+      <metal>100</metal>
     </Resources>
   </Cost>
   <GarrisonHolder>
@@ -40,7 +42,7 @@
     <LoadingRange>2</LoadingRange>
   </GarrisonHolder>
   <Health>
-    <Max>500</Max>
+    <Max>200</Max>
   </Health>
   <Identity>
     <GenericName>Battering Ram</GenericName>
@@ -69,6 +71,6 @@ Countered by: Melee Cavalry. Cannot attack organic units (but can attack other s
     </Run>
   </UnitMotion>
   <Vision>
-    <Range>80</Range>
+    <Range>48</Range>
   </Vision>
 </Entity>

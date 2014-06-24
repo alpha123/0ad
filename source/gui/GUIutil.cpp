@@ -1,4 +1,4 @@
-/* Copyright (C) 2014 Wildfire Games.
+/* Copyright (C) 2012 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -23,6 +23,7 @@ GUI utilities
 #include "GUI.h"
 #include "GUIManager.h"
 #include "maths/Matrix3D.h"
+#include "ps/Parser.h"
 
 extern int g_xres, g_yres;
 
@@ -60,35 +61,28 @@ bool __ParseString<float>(const CStrW& Value, float &Output)
 template <>
 bool __ParseString<CRect>(const CStrW& Value, CRect &Output)
 {
-	const unsigned int NUM_COORDS = 4;
-	float coords[NUM_COORDS];
-	std::wstringstream stream;
-	stream.str(Value);
-	// Parse each coordinate
-	for (unsigned int i = 0; i < NUM_COORDS; i++)
-	{
-		if (stream.eof())
-		{
-			LOGWARNING(L"Too few CRect parameters (min %i). Your input: '%s'", NUM_COORDS, Value.ToUTF8().c_str());
-			return false;
-		}
-		stream >> coords[i];
-		if ((stream.rdstate() & std::wstringstream::failbit) != 0)
-		{
-			LOGWARNING(L"Unable to parse CRect parameters. Your input: '%s'", Value.ToUTF8().c_str());
-			return false;
-		}
-	}
+	// Use the parser to parse the values
+	CParser& parser (CParserCache::Get("_$value_$value_$value_$value_"));
 
-	if (!stream.eof())
+	CParserLine line;
+	line.ParseString(parser, Value.ToUTF8());
+	if (!line.m_ParseOK)
 	{
-		LOGWARNING(L"Too many CRect parameters (max %i). Your input: '%s'", NUM_COORDS, Value.ToUTF8().c_str());
+		// Parsing failed
 		return false;
+	}
+	float values[4];
+	for (int i=0; i<4; ++i)
+	{
+		if (!line.GetArgFloat(i, values[i]))
+		{
+			// Parsing failed
+			return false;
+		}
 	}
 
 	// Finally the rectangle values
-	Output = CRect(coords[0], coords[1], coords[2], coords[3]);
-
+	Output = CRect(values[0], values[1], values[2], values[3]);
 	return true;
 }
 
@@ -99,7 +93,7 @@ bool __ParseString<CClientArea>(const CStrW& Value, CClientArea &Output)
 }
 
 template <>
-bool GUI<int>::ParseColor(const CStrW& Value, CColor &Output, int DefaultAlpha)
+bool GUI<int>::ParseColor(const CStrW& Value, CColor &Output, float DefaultAlpha)
 {
 	// First, check our database in g_GUI for pre-defined colors
 	//  If we find anything, we'll ignore DefaultAlpha
@@ -119,75 +113,63 @@ bool __ParseString<CColor>(const CStrW& Value, CColor &Output)
 	if (g_GUI->GetPreDefinedColor(Value.ToUTF8(), Output))
 		return true;
 
-	return Output.ParseString(Value.ToUTF8());
+	return Output.ParseString(Value.ToUTF8(), 255.f);
 }
 
 template <>
 bool __ParseString<CSize>(const CStrW& Value, CSize &Output)
 {
-	const unsigned int NUM_COORDS = 2;
-	float coords[NUM_COORDS];
-	std::wstringstream stream;
-	stream.str(Value);
-	// Parse each coordinate
-	for (unsigned int i = 0; i < NUM_COORDS; i++)
-	{
-		if (stream.eof())
-		{
-			LOGWARNING(L"Too few CSize parameters (min %i). Your input: '%s'", NUM_COORDS, Value.ToUTF8().c_str());
-			return false;
-		}
-		stream >> coords[i];
-		if ((stream.rdstate() & std::wstringstream::failbit) != 0)
-		{
-			LOGWARNING(L"Unable to parse CSize parameters. Your input: '%s'", Value.ToUTF8().c_str());
-			return false;
-		}
-	}
+	// Use the parser to parse the values
+	CParser& parser (CParserCache::Get("_$value_$value_"));
 
-	Output.cx = coords[0];
-	Output.cy = coords[1];
-
-	if (!stream.eof())
+	CParserLine line;
+	line.ParseString(parser, Value.ToUTF8());
+	if (!line.m_ParseOK)
 	{
-		LOGWARNING(L"Too many CSize parameters (max %i). Your input: '%s'", NUM_COORDS, Value.ToUTF8().c_str());
+		// Parsing failed
 		return false;
 	}
 
+	float x, y;
+
+	// x
+	if (!line.GetArgFloat(0, x))
+	{
+		// TODO Gee: Parsing failed
+		return false;
+	}
+
+	// y
+	if (!line.GetArgFloat(1, y))
+	{
+		// TODO Gee: Parsing failed
+		return false;
+	}
+
+	Output.cx = x;
+	Output.cy = y;
+	
 	return true;
 }
 
 template <>
 bool __ParseString<CPos>(const CStrW& Value, CPos &Output)
 {
-	const unsigned int NUM_COORDS = 2;
-	float coords[NUM_COORDS];
-	std::wstringstream stream;
-	stream.str(Value);
-	// Parse each coordinate
-	for (unsigned int i = 0; i < NUM_COORDS; i++)
-	{
-		if (stream.eof())
-		{
-			LOGWARNING(L"Too few CPos parameters (min %i). Your input: '%s'", NUM_COORDS, Value.ToUTF8().c_str());
-			return false;
-		}
-		stream >> coords[i];
-		if ((stream.rdstate() & std::wstringstream::failbit) != 0)
-		{
-			LOGWARNING(L"Unable to parse CPos parameters. Your input: '%s'", Value.ToUTF8().c_str());
-			return false;
-		}
-	}
+	CParser& parser (CParserCache::Get("_[-$arg(_minus)]$value_[-$arg(_minus)]$value_"));
 
-	Output.x = coords[0];
-	Output.y = coords[1];
-
-	if (!stream.eof())
-	{
-		LOGWARNING(L"Too many CPos parameters (max %i). Your input: '%s'", NUM_COORDS, Value.ToUTF8().c_str());
+	CParserLine line;
+	line.ParseString(parser, Value.ToUTF8());
+	if (!line.m_ParseOK)
 		return false;
-	}
+
+	float x, y;
+	if (!line.GetArgFloat(0, x))
+		return false;
+	if (!line.GetArgFloat(1, y))
+		return false;
+
+	Output.x = x;
+	Output.y = y;
 
 	return true;
 }

@@ -15,8 +15,7 @@
   </BuildRestrictions>
   <Identity>
     <GenericName>Resource Structure</GenericName>
-	<Classes datatype="tokens">-ConquestCritical</Classes>
-	<VisibleClasses datatype="tokens">Resource</VisibleClasses>
+	<Classes datatype="tokens">-ConquestCritical Resource</Classes>
   </Identity>
   <Vision>
     <Range>4</Range>

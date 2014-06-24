@@ -9,7 +9,7 @@
     <Population>5</Population>
   </Cost>
   <Identity>
-	<VisibleClasses datatype="tokens">Siege</VisibleClasses>
+	<Classes datatype="tokens">Siege</Classes>
     <GenericName>Siege</GenericName>
     <RequiredTechnology>phase_city</RequiredTechnology>
   </Identity>

@@ -7,7 +7,6 @@
 	<script file="gui/common/functions_global_object.js"/>
 	<script file="gui/common/functions_utility.js"/>
 	<script file="gui/gamesetup/gamesetup.js"/>
-	<script directory="gui/gamesetup/victory_conditions/"/>
 
 	<!-- Add a translucent black background to fade out the menu page -->
 	<object type="image" style="ModernWindow" size="0 0 100% 100%">
@@ -262,7 +261,7 @@
 			<!-- More Options -->
 			<object hidden="true" name="moreOptionsFade" type="image" z="60" sprite="ModernFade"/>
 			<object name="moreOptions" type="image" sprite="ModernDialog" size="50%-200 50%-175 50%+200 50%+180" z="70" hidden="true">
-				<object style="ModernLabelText" type="text" size="50%-128 -18 50%+128 14">
+				<object style="TitleText" type="text" size="50%-128 0%-16 50%+128 16">
 					<translatableAttribute id="caption">More Options</translatableAttribute>
 				</object>
 

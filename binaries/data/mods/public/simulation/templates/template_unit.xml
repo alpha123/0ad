@@ -3,7 +3,7 @@
   <Armour>
     <Hack>1</Hack>
     <Pierce>1</Pierce>
-    <Crush>5</Crush>
+    <Crush>1</Crush>
   </Armour>
   <Cost>
     <Population>1</Population>
@@ -37,7 +37,14 @@
     <GenericName>Unit</GenericName>
     <Classes datatype="tokens">Unit ConquestCritical</Classes>
     <Formations datatype="tokens">
+      formations/scatter
+      formations/box
+      formations/column_closed
       formations/line_closed
+      formations/column_open
+      formations/line_open
+      formations/flank
+      formations/battle_line
     </Formations>
   </Identity>
   <Looter/>

@@ -28,10 +28,10 @@
   <Identity>
     <GenericName>Barracks</GenericName>
     <Tooltip>Train citizen-soldiers. Research training improvements. Garrison: 10.</Tooltip>
-    <VisibleClasses datatype="tokens">
+    <Classes datatype="tokens">
 	  Village
 	  Barracks
-	</VisibleClasses>
+	</Classes>
     <Icon>structures/barracks.png</Icon>
     <RequiredTechnology>phase_village</RequiredTechnology>
   </Identity>
